@@ -26,7 +26,7 @@ public class Swerve extends SubsystemBase {
     private final AHRS gyro;
 
     public Swerve() {
-        gyro = new AHRS(Port.kUSB1);
+        gyro = new AHRS(SPI.Port.kMXP);
         zeroGyro();
 
         mSwerveMods = new SwerveModule[] {
