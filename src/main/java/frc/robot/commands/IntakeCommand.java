@@ -11,7 +11,7 @@ public class IntakeCommand extends CommandBase {
     SpinnerSubsystem spinnerSubsystem;
     XboxController controller;
 
-    public IntakeCommand(GripSubsystem gripSubsystem, IntakeCommand intakeCommand, SpinnerSubsystem spinnerSubsystem, XboxController controller)  {
+    public IntakeCommand(GripSubsystem gripSubsystem, IntakeSubsystem intakeSubsystem, SpinnerSubsystem spinnerSubsystem, XboxController controller)  {
         this.gripSubsystem = gripSubsystem;
         this.intakeSubsystem = intakeSubsystem;
         this.spinnerSubsystem = spinnerSubsystem;

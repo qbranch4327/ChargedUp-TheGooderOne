@@ -20,6 +20,14 @@ import frc.robot.subsystems.*;
 public class RobotContainer {
     /* Controllers */
     private final Joystick driver = new Joystick(0);
+    private final XboxController driver2 = new XboxController(1);
+
+    private final ElevatorSubsystem eSub;
+    private final TiltSubsystem tSub;
+    private final GripSubsystem gSub;
+    private final IntakeSubsystem iSub;
+    private final SpinnerSubsystem sSub;
+    private final VisionSubsystem vision;
 
     /* Drive Controls */
     private final int translationAxis = XboxController.Axis.kLeftY.value;
@@ -36,6 +44,17 @@ public class RobotContainer {
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
+
+        this.eSub = new ElevatorSubsystem();
+        this.tSub = new TiltSubsystem();
+        this.gSub = new GripSubsystem();
+        this.iSub = new IntakeSubsystem();
+        this.sSub = new SpinnerSubsystem();
+        this.vision = new VisionSubsystem();
+
+        eSub.setDefaultCommand(new ElevatorCommand(eSub, tSub, driver2));
+        iSub.setDefaultCommand(new IntakeCommand(gSub, iSub, sSub, driver2));
+
         s_Swerve.setDefaultCommand(
             new TeleopSwerve(
                 s_Swerve, 

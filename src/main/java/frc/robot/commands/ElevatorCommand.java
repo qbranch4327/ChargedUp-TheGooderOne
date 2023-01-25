@@ -24,11 +24,11 @@ public class ElevatorCommand extends CommandBase {
             elevatorSubsystem.goUp(Data.n("upperDistance"));
             inclinatorSubsystem.tiltUp(Data.n("upperDegree"));
         }
-        if (controller.getAButton())    {
+        if (controller.getBButton())    {
             elevatorSubsystem.goUp(Data.n("middleDistance"));
             inclinatorSubsystem.tiltUp(Data.n("middleDegree"));
         }
-        if (controller.getAButton())    {
+        if (controller.getYButton())    {
             elevatorSubsystem.goDown(Data.n("restPosition"));
             inclinatorSubsystem.tiltDown(Data.n("restDegree"));
         }
