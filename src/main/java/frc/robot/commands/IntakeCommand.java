@@ -32,10 +32,10 @@ public class IntakeCommand extends CommandBase {
                 spinnerSubsystem.spin();
             }
         }
-        if (controller.getLeftBumper())    {
+        if (controller.getLeftTriggerAxis() > .2)    {
             gripSubsystem.grab();
         }
-        else if (controller.getRightBumper())   {
+        else if (controller.getRightTriggerAxis() > .2)   {
             gripSubsystem.release();
         }
         else    {
