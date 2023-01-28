@@ -90,8 +90,8 @@ public final class Constants {
 
         /* Module Specific Constants */
         /* Front Left Module - Module 0 */
-        public static final class Mod0 { //TODO: This must be tuned to specific robot
-
+        public static final class Mod0 {
+            // TODO: This must be tuned to specific robot
             public static final int driveMotorID = 0;
             public static final int angleMotorID = 4;
             public static final int canCoderID = 3;

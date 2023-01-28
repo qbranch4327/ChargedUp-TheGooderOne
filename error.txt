@@ -1,0 +1,36 @@
+********** Robot program starting **********
+NT: could not open persistent file '/home/lvuser/networktables.json': No such file or directory
+NT: Listening on NT3 port 1735, NT4 port 5810
+NT: Got a NT3 connection from 172.22.11.1 port 51923
+NT: CONNECTED NT3 client 'NT3@172.22.11.1:51923' (from 172.22.11.1:51923)
+NT: Got a NT3 connection from 10.43.27.25 port 55244
+NT: CONNECTED NT3 client 'NT3@10.43.27.25:55244' (from 10.43.27.25:55244)
+Instantiating navX-Sensor on Serial Port kUSB.
+navX-Sensor Java library for FRC
+Opening USB serial port to communicate with navX-Sensor.
+Error opening USB serial port to communicate with navX-Sensor.
+Unable to open USB serial port to communicate with navX-Sensor.
+
+********** Robot program starting **********
+NT: could not open persistent file '/home/lvuser/networktables.json': No such file or directory
+NT: Listening on NT3 port 1735, NT4 port 5810
+NT: Got a NT3 connection from 172.22.11.1 port 52673
+NT: CONNECTED NT3 client 'NT3@172.22.11.1:52673' (from 172.22.11.1:52673)
+Instantiating navX-Sensor on Serial Port kUSB1.
+navX-Sensor Java library for FRC
+NT: Got a NT3 connection from 10.43.27.25 port 43420
+NT: CONNECTED NT3 client 'NT3@10.43.27.25:43420' (from 10.43.27.25:43420)
+Opening USB serial port to communicate with navX-Sensor.
+Error opening USB serial port to communicate with navX-Sensor.
+Unable to open USB serial port to communicate with navX-Sensor
+
+********** Robot program starting **********
+NT: could not open persistent file '/home/lvuser/networktables.json': No such file or directory
+NT: Listening on NT3 port 1735, NT4 port 5810
+NT: Got a NT3 connection from 172.22.11.1 port 53961
+NT: CONNECTED NT3 client 'NT3@172.22.11.1:53961' (from 172.22.11.1:53961)
+Instantiating navX-Sensor on Serial Port kUSB2.
+navX-Sensor Java library for FRC
+Opening USB serial port to communicate with navX-Sensor.
+Error opening USB serial port to communicate with navX-Sensor.
+Unable to open USB serial port to communicate with navX-Sensor.

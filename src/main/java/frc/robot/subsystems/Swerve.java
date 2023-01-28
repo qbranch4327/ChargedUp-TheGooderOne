@@ -9,24 +9,23 @@ import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 
 import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.wpilibj.SPI;
-
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Swerve extends SubsystemBase {
     public SwerveDriveOdometry swerveOdometry;
     public SwerveModule[] mSwerveMods;
-    private final AHRS gyro;
+    private AHRS gyro;
+    // private final SerialPort USB1 = new SerialPort(9600, Port.kUSB);
 
     public Swerve() {
-        gyro = new AHRS(SPI.Port.kMXP);
+        gyro = new AHRS(I2C.Port.kOnboard);
         zeroGyro();
 
         mSwerveMods = new SwerveModule[] {
