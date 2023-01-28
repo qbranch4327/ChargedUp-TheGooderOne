@@ -1,22 +1,27 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import java.lang.Math;
 
 public class ElevatorSubsystem extends SubsystemBase{
 
     CANSparkMax elevator1;
     CANSparkMax elevator2;
-    Encoder elevatorEncoder;
+    DutyCycleEncoder elevatorEncoder;
+    private final int CyclesPerRevolution = 2048;
+    private final double circumference = 1.76 * Math.PI;
 
     public ElevatorSubsystem()  {
         elevator1 = new CANSparkMax(6, MotorType.kBrushless);
-        elevator2 = new CANSparkMax(7, MotorType.kBrushless);
+        elevator2 =  new CANSparkMax(7, MotorType.kBrushless);
+        elevatorEncoder = new DutyCycleEncoder(1);
         elevator1.setInverted(false);
         elevator2.setInverted(true);
-        elevatorEncoder = new Encoder(0, 1);
+        elevatorEncoder.setDistancePerRotation(circumference/CyclesPerRevolution);
+        elevatorEncoder.setDutyCycleRange(Data.n("restPosition"), Data.n("upperDistance"));
     }
 
     public void goUp(double distance)  {

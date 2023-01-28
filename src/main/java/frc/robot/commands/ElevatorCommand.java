@@ -20,15 +20,15 @@ public class ElevatorCommand extends CommandBase {
 
     @Override 
     public void execute()   {
-        if (controller.getAButton())    {
+        if (controller.getYButton())    {
             elevatorSubsystem.goUp(Data.n("upperDistance"));
             inclinatorSubsystem.tiltUp(Data.n("upperDegree"));
         }
-        if (controller.getBButton())    {
+        if (controller.getXButton())    {
             elevatorSubsystem.goUp(Data.n("middleDistance"));
             inclinatorSubsystem.tiltUp(Data.n("middleDegree"));
         }
-        if (controller.getYButton())    {
+        if (controller.getAButton())    {
             elevatorSubsystem.goDown(Data.n("restPosition"));
             inclinatorSubsystem.tiltDown(Data.n("restDegree"));
         }
