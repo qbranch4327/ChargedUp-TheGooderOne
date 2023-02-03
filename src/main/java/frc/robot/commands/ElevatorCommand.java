@@ -18,19 +18,25 @@ public class ElevatorCommand extends CommandBase {
         addRequirements(inclinatorSubsystem);
     }
 
+    @Override
+    public void initialize() {
+        elevatorSubsystem.resetEncoders();
+        //inclinatorSubsystem.resetEncoders();
+    }
+
     @Override 
     public void execute()   {
         if (controller.getYButton())    {
             elevatorSubsystem.goUp(Data.n("upperDistance"));
-            inclinatorSubsystem.tiltUp(Data.n("upperDegree"));
+            //inclinatorSubsystem.tiltUp(Data.n("upperDegree"));
         }
         if (controller.getXButton())    {
             elevatorSubsystem.goUp(Data.n("middleDistance"));
-            inclinatorSubsystem.tiltUp(Data.n("middleDegree"));
+            //inclinatorSubsystem.tiltUp(Data.n("middleDegree"));
         }
         if (controller.getAButton())    {
             elevatorSubsystem.goDown(Data.n("restPosition"));
-            inclinatorSubsystem.tiltDown(Data.n("restDegree"));
+            //inclinatorSubsystem.tiltDown(Data.n("restDegree"));
         }
     }
 

@@ -14,23 +14,23 @@ public class IntakeSubsystem extends SubsystemBase {
     DoubleSolenoid intake2;
 
     public IntakeSubsystem()    {
-        intakeMotor = new CANSparkMax(3, MotorType.kBrushless);
+        intakeMotor = new CANSparkMax(1, MotorType.kBrushless);
         intake1 = new DoubleSolenoid(PneumaticsModuleType.REVPH, 0, 1);
         intake2 = new DoubleSolenoid(PneumaticsModuleType.REVPH, 2, 3);
     }
 
     public void intakeOn()  {
         intakeMotor.set(0.5);
-        intake1.set(DoubleSolenoid.Value.kForward);
-        intake2.set(DoubleSolenoid.Value.kForward);
+        // intake1.set(DoubleSolenoid.Value.kForward);
+        // intake2.set(DoubleSolenoid.Value.kForward);
     }
 
     public void intakeOff() {
         intakeMotor.stopMotor();
-        intake1.set(DoubleSolenoid.Value.kReverse);
-        intake2.set(DoubleSolenoid.Value.kReverse);
-        intake1.set(DoubleSolenoid.Value.kOff);
-        intake2.set(DoubleSolenoid.Value.kOff);
+        // intake1.set(DoubleSolenoid.Value.kReverse);
+        // intake2.set(DoubleSolenoid.Value.kReverse);
+        // intake1.set(DoubleSolenoid.Value.kOff);
+        // intake2.set(DoubleSolenoid.Value.kOff);
     }
 
     public boolean isCone()     {

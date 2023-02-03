@@ -8,11 +8,11 @@ public class Data extends SubsystemBase {
 
     static ArrayList<Double> numbers = new ArrayList<Double> (){
         {
-            add(0.0);  //   upperDistance 
-            add(0.0);  //   middleDistance
+            add(74.0);  //   upperDistance 
+            add(53.25);  //   middleDistance
             add(0.0);  //   restPosition
-            add(0.0);  //   upperDegree
-            add(0.0);  //   middleDegree 
+            add(1.0);  //   upperDegree
+            add(1.0);  //   middleDegree 
             add(0.0);  //   restDegree 
         }
     };

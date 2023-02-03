@@ -28,7 +28,7 @@ public class IntakeCommand extends CommandBase {
 
     @Override
     public void execute()   {
-        if (controller1.getRawAxis(12) > .2)   {
+        if (controller2.getLeftY() > .2)   {
             intakeSubsystem.intakeOn();
         }
         else    {

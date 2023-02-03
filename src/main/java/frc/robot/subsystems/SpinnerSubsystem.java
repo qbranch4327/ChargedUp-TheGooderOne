@@ -11,7 +11,7 @@ public class SpinnerSubsystem extends SubsystemBase {
     DigitalInput spinnerStop;
 
     public SpinnerSubsystem()   {
-        spinnerMotor = new CANSparkMax(4, MotorType.kBrushless);
+        spinnerMotor = new CANSparkMax(2, MotorType.kBrushless);
         spinnerStop = new DigitalInput(9);
     }
 
