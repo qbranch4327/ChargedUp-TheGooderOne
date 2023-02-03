@@ -1,6 +1,9 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.PS4Controller.Axis;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.*;
 
@@ -9,13 +12,15 @@ public class IntakeCommand extends CommandBase {
     GripSubsystem gripSubsystem;
     IntakeSubsystem intakeSubsystem;
     SpinnerSubsystem spinnerSubsystem;
-    XboxController controller;
+    Joystick controller1;
+    XboxController controller2;
 
-    public IntakeCommand(GripSubsystem gripSubsystem, IntakeSubsystem intakeSubsystem, SpinnerSubsystem spinnerSubsystem, XboxController controller)  {
+    public IntakeCommand(GripSubsystem gripSubsystem, IntakeSubsystem intakeSubsystem, SpinnerSubsystem spinnerSubsystem, XboxController controller2, Joystick controller1)  {
         this.gripSubsystem = gripSubsystem;
         this.intakeSubsystem = intakeSubsystem;
         this.spinnerSubsystem = spinnerSubsystem;
-        this.controller = controller;
+        this.controller1 = controller1;
+        this.controller2 = controller2;
         addRequirements(gripSubsystem);
         addRequirements(intakeSubsystem);
         addRequirements(spinnerSubsystem);
@@ -23,7 +28,7 @@ public class IntakeCommand extends CommandBase {
 
     @Override
     public void execute()   {
-        if (controller.getLeftY() > .2)   {
+        if (controller1.getRawAxis(12) > .2)   {
             intakeSubsystem.intakeOn();
         }
         else    {
@@ -32,10 +37,10 @@ public class IntakeCommand extends CommandBase {
                 spinnerSubsystem.spin();
             }
         }
-        if (controller.getLeftTriggerAxis() > .2)    {
+        if (controller2.getLeftTriggerAxis() > .2)    {
             gripSubsystem.grab();
         }
-        else if (controller.getRightTriggerAxis() > .2)   {
+        else if (controller2.getRightTriggerAxis() > .2)   {
             gripSubsystem.release();
         }
         else    {

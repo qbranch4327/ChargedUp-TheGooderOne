@@ -53,7 +53,7 @@ public class RobotContainer {
         this.vision = new VisionSubsystem();
 
         eSub.setDefaultCommand(new ElevatorCommand(eSub, tSub, driver2));
-        iSub.setDefaultCommand(new IntakeCommand(gSub, iSub, sSub, driver2));
+        iSub.setDefaultCommand(new IntakeCommand(gSub, iSub, sSub, driver2, driver));
 
         s_Swerve.setDefaultCommand(
             new TeleopSwerve(
