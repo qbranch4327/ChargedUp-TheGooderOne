@@ -10,8 +10,8 @@ public class GripSubsystem extends SubsystemBase  {
     DoubleSolenoid grip2;
     
     public GripSubsystem()    {
-        grip1 = new DoubleSolenoid(PneumaticsModuleType.REVPH, 4, 5);
-        grip2 = new DoubleSolenoid(PneumaticsModuleType.REVPH, 6, 7);
+        grip1 = new DoubleSolenoid(PneumaticsModuleType.REVPH, 0, 1);
+        grip2 = new DoubleSolenoid(PneumaticsModuleType.REVPH, 2, 3);
     }
 
     public void grab()  {

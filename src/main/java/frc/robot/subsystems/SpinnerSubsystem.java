@@ -1,24 +1,26 @@
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+//import com.revrobotics.CANSparkMax;
+//import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.DigitalInput;
 
 public class SpinnerSubsystem extends SubsystemBase {
 
-    CANSparkMax spinnerMotor;
+    PWMSparkMax spinnerMotor;
     DigitalInput spinnerStop;
 
     public SpinnerSubsystem()   {
-        spinnerMotor = new CANSparkMax(2, MotorType.kBrushless);
-        spinnerStop = new DigitalInput(9);
+        spinnerMotor = new PWMSparkMax(3);
+        //spinnerStop = new DigitalInput(3);
     }
 
     public void spin()  {
         spinnerMotor.set(0.2);
-        if (spinnerStop.get())    {
-            spinnerMotor.stopMotor();
-        }
+    }
+
+    public void stop(){
+        spinnerMotor.stopMotor();
     }
 }

@@ -8,35 +8,38 @@ public class ElevatorCommand extends CommandBase {
     
     XboxController controller;
     ElevatorSubsystem elevatorSubsystem;
-    TiltSubsystem inclinatorSubsystem;
+    TiltSubsystem tiltSubsystem;
 
-    public ElevatorCommand(ElevatorSubsystem eSubsystem, TiltSubsystem iSubsystem, XboxController controller)  {
+    public ElevatorCommand(ElevatorSubsystem eSubsystem, TiltSubsystem tSubsystem, XboxController controller)  {
         this.controller = controller;
         this.elevatorSubsystem = eSubsystem;
-        this.inclinatorSubsystem = iSubsystem;
+        this.tiltSubsystem = tSubsystem;
         addRequirements(elevatorSubsystem);
-        addRequirements(inclinatorSubsystem);
+        addRequirements(tiltSubsystem);
     }
 
     @Override
-    public void initialize() {
+    public void initialize()   {
         elevatorSubsystem.resetEncoders();
-        //inclinatorSubsystem.resetEncoders();
+        //tiltSubsystem.resetEncoders();
     }
 
     @Override 
     public void execute()   {
         if (controller.getYButton())    {
-            elevatorSubsystem.goUp(Data.n("upperDistance"));
-            //inclinatorSubsystem.tiltUp(Data.n("upperDegree"));
+            elevatorSubsystem.goUp(-8656);
+            //tiltSubsystem.tiltUp(Data.n("upperDegree"));
         }
-        if (controller.getXButton())    {
-            elevatorSubsystem.goUp(Data.n("middleDistance"));
-            //inclinatorSubsystem.tiltUp(Data.n("middleDegree"));
+        else if (controller.getXButton())    {
+            elevatorSubsystem.goUp(-4699);
+            //elevatorSubsystem.goUp(Data.n("middleDistanceData.n("middleDegree"));
         }
-        if (controller.getAButton())    {
-            elevatorSubsystem.goDown(Data.n("restPosition"));
-            //inclinatorSubsystem.tiltDown(Data.n("restDegree"));
+        else if (controller.getAButton())    {
+            elevatorSubsystem.goDown(0.0);
+            //tiltSubsystem.tiltDown(Data.n("restDegree"));
+        }
+        else    {
+            elevatorSubsystem.stop();
         }
     }
 
