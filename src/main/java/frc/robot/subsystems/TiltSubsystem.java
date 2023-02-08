@@ -14,18 +14,19 @@ public class TiltSubsystem extends SubsystemBase  {
     DutyCycleEncoder tiltEncoder;
     private final int CyclesPerRevolution = 2048;
     private final double circumference = 1.76 * Math.PI;
+    private final double holdingV = -0.1;
 
     public TiltSubsystem()    {
         tiltMotor = new PWMSparkMax(1);
         tiltEncoder = new DutyCycleEncoder(2);
-        tiltEncoder.setDistancePerRotation(circumference/CyclesPerRevolution);
-        tiltEncoder.setDutyCycleRange(Data.n("restDegree"), Data.n("upperDegree"));
+        // tiltEncoder.setDistancePerRotation(circumference/CyclesPerRevolution);
+        // tiltEncoder.setDutyCycleRange(Data.n("restDegree"), Data.n("upperDegree"));
     }
 
     public void tiltUp(double degrees)    {
         tiltMotor.set(0.15);
-        if (tiltEncoder.getDistance() == degrees)   {
-            tiltMotor.stopMotor();
+        if (tiltEncoder.getAbsolutePosition() >= degrees)   {
+            tiltMotor.set(holdingV);
         }
     }
 
@@ -33,13 +34,13 @@ public class TiltSubsystem extends SubsystemBase  {
         tiltMotor.set(-.1);
     }
 
-    public void tiltDown(){
+    public void tiltDown()  {
         tiltMotor.set(.1);
     }
 
     public void tiltDown(double degrees)    {
-        tiltMotor.set(-0.15);
-        if (tiltEncoder.getDistance() == degrees)   {
+        tiltMotor.set(-0.25);
+        if (tiltEncoder.getAbsolutePosition() <= degrees)   {
             tiltMotor.stopMotor();
         }
     }
@@ -49,7 +50,7 @@ public class TiltSubsystem extends SubsystemBase  {
    // }
 
     public boolean encoderCheck(double distance){
-        if (tiltEncoder.getDistance() == distance)  {
+        if (tiltEncoder.getAbsolutePosition() == distance)  {
             return true;
         }
         return false;
@@ -57,7 +58,7 @@ public class TiltSubsystem extends SubsystemBase  {
 
     @Override
     public void periodic()  {
-        SmartDashboard.putNumber("Tilt Encoder", (tiltEncoder.getDistance()));
+        SmartDashboard.putNumber("Tilt Encoder", (tiltEncoder.getAbsolutePosition()));
     }
 
 }

@@ -32,7 +32,7 @@ public class IntakeCommand extends CommandBase {
         //     intakeSubsystem.intakeReverse();
         // }
         else    {
-            intakeSubsystem.intakeOff();
+           intakeSubsystem.intakeOff();
             // if (intakeSubsystem.isCone())   {
             //     spinnerSubsystem.spin();
             // }
