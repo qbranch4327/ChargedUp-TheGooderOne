@@ -6,6 +6,8 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
 import frc.robot.autos.*;
 import frc.robot.commands.*;
@@ -41,6 +43,8 @@ public class RobotContainer {
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
 
+    SendableChooser<Command> qChooser = new SendableChooser<>();
+
 
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
@@ -51,6 +55,12 @@ public class RobotContainer {
         this.iSub = new IntakeSubsystem();
         this.sSub = new SpinnerSubsystem();
         this.vision = new VisionSubsystem();
+
+        // qChooser.setDefaultOption("code for youtube", tv);
+        // qChooser.addOption("Regular Auton", regular);
+        // qChooser.addOption("Short Auton (for the wall)", shortauton);
+        // qChooser.addOption("3 Balls Auton", threeball);
+
 
         eSub.setDefaultCommand(new ElevatorCommand(eSub, tSub, driver2));
         iSub.setDefaultCommand(new IntakeCommand(iSub, driver2, driver));
@@ -88,6 +98,6 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
-        return new exampleAuto2(s_Swerve);
+        return qChooser.getSelected();
     }
 }
