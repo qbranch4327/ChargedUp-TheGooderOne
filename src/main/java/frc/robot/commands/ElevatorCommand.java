@@ -28,19 +28,19 @@ public class ElevatorCommand extends CommandBase {
     public void execute()   {
         if (controller.getYButton())    {
             elevatorSubsystem.goUp(-13800);
-            tiltSubsystem.tiltUp(0.79);
+            tiltSubsystem.tiltUp(0.398);
         }
         else if (controller.getXButton())    {
             elevatorSubsystem.goUp(-10022);
-            tiltSubsystem.tiltUp(0.84);
+            tiltSubsystem.tiltUp(0.448);
         }
         else if (controller.getAButton())    {
             elevatorSubsystem.goDown(0.0);
-            tiltSubsystem.tiltDown(0.568);
+            tiltSubsystem.tiltDown(0.176);
         }
         else    {
             elevatorSubsystem.goDown(0.0);
-            tiltSubsystem.tiltDown(0.568);
+            tiltSubsystem.tiltDown(0.176);
         }
     }
 

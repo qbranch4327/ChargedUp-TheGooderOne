@@ -42,6 +42,7 @@ public class RobotContainer {
 
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
+    private final PathPlannerTest pathPlannerTest = new PathPlannerTest(s_Swerve);
 
     SendableChooser<Command> qChooser = new SendableChooser<>();
 
@@ -72,7 +73,8 @@ public class RobotContainer {
                 () -> -driver.getRawAxis(translationAxis), 
                 () -> -driver.getRawAxis(strafeAxis), 
                 () -> -driver.getRawAxis(rotationAxis), 
-                () -> robotCentric.getAsBoolean()
+                () -> robotCentric.getAsBoolean(),
+                driver
             )
         );
 
@@ -98,6 +100,7 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
-        return qChooser.getSelected();
+        // return qChooser.getSelected();
+        return pathPlannerTest.getAuto();
     }
 }

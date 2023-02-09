@@ -20,7 +20,7 @@ public class Data extends SubsystemBase {
     static ArrayList<String> list = new ArrayList<String> (){
         {
             add("upperDistance"); 
-            add("middlevvvvvvvvvvvvvvvvvvvvvvvvvvvvvDistance"); 
+            add("middleDistance"); 
             add("restDistance"); 
             add("upperDegree");
             add("lowerDegree");

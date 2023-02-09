@@ -14,7 +14,7 @@ public class TiltSubsystem extends SubsystemBase  {
     DutyCycleEncoder tiltEncoder;
     private final int CyclesPerRevolution = 2048;
     private final double circumference = 1.76 * Math.PI;
-    private final double holdingV = -0.1;
+    private final double holdingV = -0.3;
 
     public TiltSubsystem()    {
         tiltMotor = new PWMSparkMax(1);
