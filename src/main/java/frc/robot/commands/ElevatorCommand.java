@@ -28,7 +28,7 @@ public class ElevatorCommand extends CommandBase {
     public void execute()   {
         if (controller.getYButton())    {
             elevatorSubsystem.goUp(-13800);
-            tiltSubsystem.tiltUp(0.398);
+            tiltSubsystem.tiltUp(0.42);
         }
         else if (controller.getXButton())    {
             elevatorSubsystem.goUp(-10022);

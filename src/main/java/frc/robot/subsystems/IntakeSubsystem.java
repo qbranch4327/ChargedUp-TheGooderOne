@@ -23,7 +23,7 @@ public class IntakeSubsystem extends SubsystemBase {
     }
 
     public void intakeOn()  {
-        intakeMotor.set(-0.5);
+        intakeMotor.set(-1);
         // intake1.set(DoubleSolenoid.Value.kForward);
         // intake2.set(DoubleSolenoid.Value.kForward);
     }

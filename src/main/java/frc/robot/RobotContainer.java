@@ -6,13 +6,11 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.autos.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
-import edu.wpi.first.wpilibj.Compressor;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -29,7 +27,7 @@ public class RobotContainer {
     //private final GripSubsystem gSub;
     private final IntakeSubsystem iSub;
     private final SpinnerSubsystem sSub;
-    private final VisionSubsystem vision;
+    //private final VisionSubsystem vision;
 
     /* Drive Controls */
     private final int translationAxis = XboxController.Axis.kLeftY.value;
@@ -43,6 +41,7 @@ public class RobotContainer {
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
     private final PathPlannerTest pathPlannerTest = new PathPlannerTest(s_Swerve);
+    private final redtest redtest = new redtest(s_Swerve);
 
     SendableChooser<Command> qChooser = new SendableChooser<>();
 
@@ -52,16 +51,16 @@ public class RobotContainer {
 
         this.eSub = new ElevatorSubsystem();
         this.tSub = new TiltSubsystem();
-        //this.gSub = new GripSubsystem();
         this.iSub = new IntakeSubsystem();
         this.sSub = new SpinnerSubsystem();
-        this.vision = new VisionSubsystem();
+        //this.vision = new VisionSubsystem();
 
-        // qChooser.setDefaultOption("code for youtube", tv);
-        // qChooser.addOption("Regular Auton", regular);
+        qChooser.setDefaultOption("test", pathPlannerTest.getAuto());
+        qChooser.addOption("red 1", redtest.getAuto());
         // qChooser.addOption("Short Auton (for the wall)", shortauton);
         // qChooser.addOption("3 Balls Auton", threeball);
 
+        SmartDashboard.putData(qChooser);
 
         eSub.setDefaultCommand(new ElevatorCommand(eSub, tSub, driver2));
         iSub.setDefaultCommand(new IntakeCommand(iSub, driver2, driver));
@@ -101,6 +100,6 @@ public class RobotContainer {
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
         // return qChooser.getSelected();
-        return pathPlannerTest.getAuto();
+        return qChooser.getSelected();
     }
 }
