@@ -8,17 +8,24 @@ import com.pathplanner.lib.auto.PIDConstants;
 import com.pathplanner.lib.auto.SwerveAutoBuilder;
 import com.pathplanner.lib.commands.FollowPathWithEvents;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.Constants;
-import frc.robot.subsystems.Swerve;
+import frc.robot.commands.*;
+import frc.robot.subsystems.*;
 
 public class PathPlannerTest {
 
     Swerve swerve;
     Subsystem[] subsystems;
     SwerveAutoBuilder builder;
+    IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+    GripSubsystem gripSubsystem = new GripSubsystem();
+
+    VomitCommand vomit = new VomitCommand(intakeSubsystem); 
+    AutonIntakeCommand intake = new AutonIntakeCommand(intakeSubsystem, gripSubsystem, null);
 
     public PathPlannerTest(Swerve swerve) {
         this.swerve = swerve;
@@ -40,7 +47,8 @@ public class PathPlannerTest {
         PathPlannerTrajectory testPath = PathPlanner.loadPath("TEST", new PathConstraints(4, 3));
         
         HashMap<String, Command> eventMap = new HashMap<>();
-        eventMap.put("vomitCargo", (Command) new vomit());
+        eventMap.put("vomitCargo", vomit);
+        //eventMap.put("intakeCone", intake);
 
         FollowPathWithEvents command = new FollowPathWithEvents(
             builder.followPath(testPath),
