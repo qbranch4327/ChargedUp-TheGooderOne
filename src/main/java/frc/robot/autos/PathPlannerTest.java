@@ -31,6 +31,7 @@ public class PathPlannerTest {
             new PIDConstants(0.05, 0, 0), 
             swerve::setModuleStates, 
             new HashMap<>(), 
+            // true,
             subsystems
             );
     }
@@ -38,14 +39,14 @@ public class PathPlannerTest {
     public CommandBase getAuto(){
         PathPlannerTrajectory testPath = PathPlanner.loadPath("TEST", new PathConstraints(4, 3));
         
-        // HashMap<String, Command> eventMap = new HashMap<>();
-        // eventMap.put("marker1", (Command) new test());
+        HashMap<String, Command> eventMap = new HashMap<>();
+        eventMap.put("marker1", (Command) new test());
 
-        // FollowPathWithEvents command = new FollowPathWithEvents(
-        //     getPathFollowingCommand(TEST),
-        //     TEST.getMarkers(),
-        //     eventMap
-        // );
+        FollowPathWithEvents command = new FollowPathWithEvents(
+            getPathFollowingCommand(),
+            TEST.getMarkers(),
+            eventMap
+        );
 
         return builder.followPath(testPath);
     }
