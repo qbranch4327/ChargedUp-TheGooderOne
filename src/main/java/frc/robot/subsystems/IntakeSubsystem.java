@@ -67,4 +67,13 @@ public class IntakeSubsystem extends SubsystemBase {
         intakeMotor.set(1);
     }
 
+    public boolean status(){
+        if (grip1.get() == DoubleSolenoid.Value.kForward){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
 }
