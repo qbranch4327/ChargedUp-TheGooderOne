@@ -39,14 +39,14 @@ public class PathPlannerTest {
     public CommandBase getAuto(){
         PathPlannerTrajectory testPath = PathPlanner.loadPath("TEST", new PathConstraints(4, 3));
         
-        HashMap<String, Command> eventMap = new HashMap<>();
-        eventMap.put("marker1", (Command) new test());
+        // HashMap<String, Command> eventMap = new HashMap<>();
+        // eventMap.put("marker1", (Command) new test());
 
-        FollowPathWithEvents command = new FollowPathWithEvents(
-            getPathFollowingCommand(),
-            TEST.getMarkers(),
-            eventMap
-        );
+        // FollowPathWithEvents command = new FollowPathWithEvents(
+        //     getPathFollowing(testPath),
+        //     testPath.getMarkers(),
+        //     eventMap
+        // );
 
         return builder.followPath(testPath);
     }
