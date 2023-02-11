@@ -47,10 +47,12 @@ public class IntakeCommand extends CommandBase {
         
 
         if (controller2.getLeftBumper())    {
-            intakeSubsystem.grab();
-        }
-        else    {
-            intakeSubsystem.release();
+            if (intakeSubsystem.status()){
+                intakeSubsystem.release();
+            }
+            else    {
+                intakeSubsystem.grab();
+            }
         }
     }
 
