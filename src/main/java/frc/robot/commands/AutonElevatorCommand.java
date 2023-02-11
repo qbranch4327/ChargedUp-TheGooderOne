@@ -7,19 +7,19 @@ import edu.wpi.first.wpilibj.Timer;
 public class AutonElevatorCommand extends CommandBase{
     ElevatorSubsystem elevatorSubsystem;
     TiltSubsystem tiltSubsystem;
-    GripSubsystem gripSubsystem;
+    IntakeSubsystem intake;
     Timer timer;
     double startTime = 0;
     double endTime = 0;
     
-    public AutonElevatorCommand(ElevatorSubsystem elevatorSubsystem, TiltSubsystem tiltSubsystem, GripSubsystem gripSubsystem, Timer timer) {
+    public AutonElevatorCommand(ElevatorSubsystem elevatorSubsystem, TiltSubsystem tiltSubsystem, IntakeSubsystem intake, Timer timer) {
         this.elevatorSubsystem = elevatorSubsystem;
         this.tiltSubsystem = tiltSubsystem;
-        this.gripSubsystem = gripSubsystem;
+        this.intake = intake;
         this.timer = timer;
         addRequirements(elevatorSubsystem);
         addRequirements(tiltSubsystem);
-        addRequirements(gripSubsystem);
+        addRequirements(intake);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class AutonElevatorCommand extends CommandBase{
     @Override
     public boolean isFinished() {
         if (elevatorSubsystem.encoderCheck(Data.n("upperDistance")) && tiltSubsystem.encoderCheck(Data.n("upperDegree")))   {
-            gripSubsystem.release();
+            intake.release();
             return true;
         }
         return false;

@@ -40,7 +40,7 @@ public class RobotContainer {
 
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
-    private final PathPlannerTest pathPlannerTest = new PathPlannerTest(s_Swerve);
+    private final PathPlannerTest pathPlannerTest;
     private final redtest redTest = new redtest(s_Swerve);
 
     SendableChooser<Command> qChooser = new SendableChooser<>();
@@ -54,7 +54,7 @@ public class RobotContainer {
         this.iSub = new IntakeSubsystem();
         this.sSub = new SpinnerSubsystem();
         //this.vision = new VisionSubsystem();
-
+        pathPlannerTest = new PathPlannerTest(s_Swerve, iSub);
         qChooser.setDefaultOption("test", pathPlannerTest.getAuto());
         qChooser.addOption("red 1", redTest.getAuto());
         // qChooser.addOption("Short Auton (for the wall)", shortauton);

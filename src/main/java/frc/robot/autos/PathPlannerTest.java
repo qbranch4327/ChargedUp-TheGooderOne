@@ -21,14 +21,16 @@ public class PathPlannerTest {
     Swerve swerve;
     Subsystem[] subsystems;
     SwerveAutoBuilder builder;
-    IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-    GripSubsystem gripSubsystem = new GripSubsystem();
+    IntakeSubsystem intakesub;
+    VomitCommand vomit;
+    AutonIntakeCommand intake;
+    
 
-    VomitCommand vomit = new VomitCommand(intakeSubsystem); 
-    AutonIntakeCommand intake = new AutonIntakeCommand(intakeSubsystem, gripSubsystem, null);
-
-    public PathPlannerTest(Swerve swerve) {
+    public PathPlannerTest(Swerve swerve, IntakeSubsystem intakesub) {
         this.swerve = swerve;
+        this.intakesub = intakesub;
+        vomit = new VomitCommand(intakesub); 
+        intake = new AutonIntakeCommand(intakesub, null);
         subsystems = new Subsystem[]{swerve};
         this.builder = new SwerveAutoBuilder(
             swerve::getPose, 
@@ -48,7 +50,7 @@ public class PathPlannerTest {
         
         HashMap<String, Command> eventMap = new HashMap<>();
         eventMap.put("vomitCargo", vomit);
-        //eventMap.put("intakeCone", intake);
+        eventMap.put("intakeCone", intake);
 
         FollowPathWithEvents command = new FollowPathWithEvents(
             builder.followPath(testPath),
