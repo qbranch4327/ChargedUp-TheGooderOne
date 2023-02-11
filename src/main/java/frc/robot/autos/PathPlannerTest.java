@@ -43,8 +43,8 @@ public class PathPlannerTest {
         eventMap.put("marker1", (Command) new test());
 
         FollowPathWithEvents command = new FollowPathWithEvents(
-            getPathFollowingCommand(),
-            TEST.getMarkers(),
+            getPathFollowingCommand(testPath),
+            testPath.getMarkers(),
             eventMap
         );
 

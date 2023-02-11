@@ -63,6 +63,8 @@ public class IntakeSubsystem extends SubsystemBase {
         grip1.set(DoubleSolenoid.Value.kReverse);
     }
 
-    
+    public void vomit() {
+        intakeMotor.set(1);
+    }
 
 }
