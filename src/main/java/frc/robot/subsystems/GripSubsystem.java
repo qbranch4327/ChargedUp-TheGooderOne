@@ -6,26 +6,21 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 public class GripSubsystem extends SubsystemBase  {
 
-    DoubleSolenoid grip1;
-    DoubleSolenoid grip2;
+    // DoubleSolenoid grip1;
     
-    public GripSubsystem()    {
-        grip1 = new DoubleSolenoid(PneumaticsModuleType.REVPH, 0, 1);
-        grip2 = new DoubleSolenoid(PneumaticsModuleType.REVPH, 2, 3);
-    }
+    // public GripSubsystem()    {
+    //     grip1 = new DoubleSolenoid(PneumaticsModuleType.REVPH, 0, 1);
+    // }
 
-    public void grab()  {
-        grip1.set(DoubleSolenoid.Value.kForward);
-        grip2.set(DoubleSolenoid.Value.kForward);
-    }
+    // public void grab()  {
+    //     grip1.set(DoubleSolenoid.Value.kForward);
+    // }
 
-    public void release()   {
-        grip1.set(DoubleSolenoid.Value.kReverse);
-        grip2.set(DoubleSolenoid.Value.kReverse);
-    }
+    // public void release()   {
+    //     grip1.set(DoubleSolenoid.Value.kReverse);
+    // }
 
-    public void rest()  {
-        grip1.set(DoubleSolenoid.Value.kOff);
-        grip2.set(DoubleSolenoid.Value.kOff);
-    }
+    // public void rest()  {
+    //     grip1.set(DoubleSolenoid.Value.kOff);
+    // }
 }

@@ -12,12 +12,10 @@ public class AutonIntakeCommand extends CommandBase{
     double endTime = 0;
     boolean position = true;
     
-    public AutonIntakeCommand(IntakeSubsystem intakeSubsystem, GripSubsystem gripSubsystem, Timer timer) {
+    public AutonIntakeCommand(IntakeSubsystem intakeSubsystem, Timer timer) {
         this.intakeSubsystem = intakeSubsystem;
-        this.gripSubsystem = gripSubsystem;
         this.timer = timer;
         addRequirements(intakeSubsystem);
-        addRequirements(gripSubsystem);
     }
 
     @Override
@@ -32,7 +30,7 @@ public class AutonIntakeCommand extends CommandBase{
             intakeSubsystem.intakeOn();
         }
         if (position)   {
-            gripSubsystem.grab();
+            intakeSubsystem.grab();
         }
     }
 

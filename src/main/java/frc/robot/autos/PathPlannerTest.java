@@ -8,20 +8,29 @@ import com.pathplanner.lib.auto.PIDConstants;
 import com.pathplanner.lib.auto.SwerveAutoBuilder;
 import com.pathplanner.lib.commands.FollowPathWithEvents;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.Constants;
-import frc.robot.subsystems.Swerve;
+import frc.robot.commands.*;
+import frc.robot.subsystems.*;
 
 public class PathPlannerTest {
 
     Swerve swerve;
     Subsystem[] subsystems;
     SwerveAutoBuilder builder;
+    IntakeSubsystem intakesub;
+    VomitCommand vomit;
+    AutonIntakeCommand intake;
+    
 
-    public PathPlannerTest(Swerve swerve) {
+    public PathPlannerTest(Swerve swerve, IntakeSubsystem intakesub) {
         this.swerve = swerve;
+        this.intakesub = intakesub;
+        vomit = new VomitCommand(intakesub); 
+        intake = new AutonIntakeCommand(intakesub, null);
         subsystems = new Subsystem[]{swerve};
         this.builder = new SwerveAutoBuilder(
             swerve::getPose, 
@@ -31,6 +40,7 @@ public class PathPlannerTest {
             new PIDConstants(0.05, 0, 0), 
             swerve::setModuleStates, 
             new HashMap<>(), 
+            // true,
             subsystems
             );
     }
@@ -38,16 +48,17 @@ public class PathPlannerTest {
     public CommandBase getAuto(){
         PathPlannerTrajectory testPath = PathPlanner.loadPath("TEST", new PathConstraints(4, 3));
         
-        // HashMap<String, Command> eventMap = new HashMap<>();
-        // eventMap.put("marker1", (Command) new test());
+        HashMap<String, Command> eventMap = new HashMap<>();
+        eventMap.put("vomitCargo", vomit);
+        eventMap.put("intakeCone", intake);
 
-        // FollowPathWithEvents command = new FollowPathWithEvents(
-        //     getPathFollowingCommand(TEST),
-        //     TEST.getMarkers(),
-        //     eventMap
-        // );
+        FollowPathWithEvents command = new FollowPathWithEvents(
+            builder.followPath(testPath),
+            testPath.getMarkers(),
+            eventMap
+        );
 
-        return builder.followPath(testPath);
+        return command;
     }
 
     // This will load the file "Example Path.path" and generate it with a max velocity of 4 m/s and a max acceleration of 3 m/s^2
