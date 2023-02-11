@@ -40,15 +40,15 @@ public class PathPlannerTest {
         PathPlannerTrajectory testPath = PathPlanner.loadPath("TEST", new PathConstraints(4, 3));
         
         HashMap<String, Command> eventMap = new HashMap<>();
-        eventMap.put("marker1", (Command) new test());
+        eventMap.put("vomitCargo", (Command) new vomit());
 
         FollowPathWithEvents command = new FollowPathWithEvents(
-            getPathFollowingCommand(testPath),
+            builder.followPath(testPath),
             testPath.getMarkers(),
             eventMap
         );
 
-        return builder.followPath(testPath);
+        return command;
     }
 
     // This will load the file "Example Path.path" and generate it with a max velocity of 4 m/s and a max acceleration of 3 m/s^2
