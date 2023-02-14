@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.Timer;
 
 public class AutonIntakeCommand extends CommandBase{
     IntakeSubsystem intakeSubsystem;
-    GripSubsystem gripSubsystem;
     Timer timer;
     double startTime = 0;
     double endTime = 0;
