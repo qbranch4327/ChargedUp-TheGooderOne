@@ -42,7 +42,7 @@ public class RobotContainer {
 
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
-    private final PathPlannerTest pathPlannerTest;
+    // private final PathPlannerTest pathPlannerTest;
     private final AutonPaths blue1;
     // private final AutonPaths blue1Plat;
     // private final AutonPaths blue2BCube;
@@ -73,7 +73,7 @@ public class RobotContainer {
         this.iSub = new IntakeSubsystem();
         this.sSub = new SpinnerSubsystem();
         //this.vision = new VisionSubsystem();
-        pathPlannerTest = new PathPlannerTest(s_Swerve, iSub);
+        // pathPlannerTest = new PathPlannerTest(s_Swerve, iSub);
         blue1 = new AutonPaths(s_Swerve, iSub);
         // blue1Plat = new AutonPaths(s_Swerve, iSub);
         // blue2BCube = new AutonPaths(s_Swerve, iSub);
@@ -93,8 +93,8 @@ public class RobotContainer {
         // red3 = new AutonPaths(s_Swerve, iSub);
         // red3Plat = new AutonPaths(s_Swerve, iSub);
 
-        qChooser.setDefaultOption("test", pathPlannerTest.getAuto());
-        qChooser.addOption("Blue Auton 1", blue1.getAuto(0));
+        // qChooser.setDefaultOption("test", pathPlannerTest.getAuto());
+        qChooser.setDefaultOption("Blue Auton 1", blue1.getAuto(0));
         // qChooser.addOption("Blue Auton 1 Platform", blue1Plat.getAuto(1));
         // qChooser.addOption("Blue Auton 2 Bottom Cube", blue2BCube.getAuto(2));
         // qChooser.addOption("Blue Auton 2 Top Cube", blue2TCube.getAuto(3));
