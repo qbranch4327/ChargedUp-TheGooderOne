@@ -1,5 +1,7 @@
 package frc.robot;
 
+import org.opencv.objdetect.QRCodeDetector;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -41,7 +43,24 @@ public class RobotContainer {
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
     private final PathPlannerTest pathPlannerTest;
-    private final redtest redTest = new redtest(s_Swerve);
+    private final AutonPaths blue1;
+    private final AutonPaths blue1Plat;
+    private final AutonPaths blue2BCube;
+    private final AutonPaths blue2TCube;
+    private final AutonPaths blue2Down;
+    private final AutonPaths blue2Mid;
+    private final AutonPaths blue2Up;
+    private final AutonPaths blue3;
+    private final AutonPaths blue3Plat;
+    private final AutonPaths red1;
+    private final AutonPaths red1Plat;
+    private final AutonPaths red2BCube;
+    private final AutonPaths red2TCube;
+    private final AutonPaths red2Down;
+    private final AutonPaths red2Mid;
+    private final AutonPaths red2Up;
+    private final AutonPaths red3;
+    private final AutonPaths red3Plat;
 
     SendableChooser<Command> qChooser = new SendableChooser<>();
 
@@ -55,8 +74,46 @@ public class RobotContainer {
         this.sSub = new SpinnerSubsystem();
         //this.vision = new VisionSubsystem();
         pathPlannerTest = new PathPlannerTest(s_Swerve, iSub);
+        blue1 = new AutonPaths(s_Swerve, iSub, "Blue Auton 1");
+        blue1Plat = new AutonPaths(s_Swerve, iSub, "Blue Auton 1 Platform");
+        blue2BCube = new AutonPaths(s_Swerve, iSub, "Blue Auton 2 Bottom Cube");
+        blue2TCube = new AutonPaths(s_Swerve, iSub, "Blue Auton 2 Top Cube");
+        blue2Down = new AutonPaths(s_Swerve, iSub, "Blue Auton 2 Down");
+        blue2Mid = new AutonPaths(s_Swerve, iSub, "Blue Auton 2 Middle");
+        blue2Up = new AutonPaths(s_Swerve, iSub, "Blue Auton 2 Up");
+        blue3 = new AutonPaths(s_Swerve, iSub, "Blue Auton 3");
+        blue3Plat = new AutonPaths(s_Swerve, iSub, "Blue Auton 3 Platform");
+        red1 = new AutonPaths(s_Swerve, iSub, "Red Auton 1");
+        red1Plat = new AutonPaths(s_Swerve, iSub, "Red Auton 1 Platform");
+        red2BCube = new AutonPaths(s_Swerve, iSub, "Red Auton 2 Bottom Cube");
+        red2TCube = new AutonPaths(s_Swerve, iSub, "Red Auton 2 Top Cube");
+        red2Down = new AutonPaths(s_Swerve, iSub, "Red Auton 2 Down");
+        red2Mid = new AutonPaths(s_Swerve, iSub, "Red Auton 2 Middle");
+        red2Up = new AutonPaths(s_Swerve, iSub, "Red Auton 2 Up");
+        red3 = new AutonPaths(s_Swerve, iSub, "Red Auton 3");
+        red3Plat = new AutonPaths(s_Swerve, iSub, "Red Auton 3 Platform");
+
         qChooser.setDefaultOption("test", pathPlannerTest.getAuto());
-        qChooser.addOption("red 1", redTest.getAuto());
+        qChooser.addOption("Blue Auton 1", blue1.getAuto());
+        qChooser.addOption("Blue Auton 1 Platform", blue1Plat.getAuto());
+        qChooser.addOption("Blue Auton 2 Bottom Cube", blue2BCube.getAuto());
+        qChooser.addOption("Blue Auton 2 Top Cube", blue2TCube.getAuto());
+        qChooser.addOption("Blue Auton 2 Down", blue2Down.getAuto());
+        qChooser.addOption("Blue Auton 2 Middle", blue2Mid.getAuto());
+        qChooser.addOption("Blue Auton 2 Up", blue2Up.getAuto());
+        qChooser.addOption("Blue Auton 3", blue3.getAuto());
+        qChooser.addOption("Blue Auton 3 Platform", blue3Plat.getAuto());
+        qChooser.addOption("Red Auton 1", red1.getAuto());
+        qChooser.addOption("Red Auton 1 Platform", red1Plat.getAuto());
+        qChooser.addOption("Red Auton 2 Bottom Cube", red2BCube.getAuto());
+        qChooser.addOption("Red Auton 2 Top Cube", red2TCube.getAuto());
+        qChooser.addOption("Red Auton 2 Down", red2Down.getAuto());
+        qChooser.addOption("Red Auton 2 Middle", red2Mid.getAuto());
+        qChooser.addOption("Red Auton 2 Up", red2Up.getAuto());
+        qChooser.addOption("Red Auton 3", red3.getAuto());
+        qChooser.addOption("Red Auton 3 Platform", red3Plat.getAuto());
+
+
         // qChooser.addOption("Short Auton (for the wall)", shortauton);
         // qChooser.addOption("3 Balls Auton", threeball);
 

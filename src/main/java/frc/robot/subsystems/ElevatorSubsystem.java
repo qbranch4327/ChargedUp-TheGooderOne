@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 
+import org.w3c.dom.css.ElementCSSInlineStyle;
+
 //import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -27,9 +29,14 @@ public class ElevatorSubsystem extends SubsystemBase{
     }
 
     public void goUp(double distance)  {
-        elevator.set(0.25);
-        if (elevatorEncoder.getDistance() <= distance)  {
-           elevator.stopMotor();
+        if (elevatorEncoder.getDistance() >= distance + 200)   {
+            elevator.set(0.35);
+        }
+        else if(elevatorEncoder.getDistance() <= distance - 200){
+            elevator.set(-0.15);
+        }
+        else{
+            elevator.stopMotor();
         }
     }
     public void goUp()  {
