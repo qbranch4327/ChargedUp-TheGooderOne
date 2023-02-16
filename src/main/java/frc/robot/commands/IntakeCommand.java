@@ -10,49 +10,47 @@ import frc.robot.subsystems.*;
 public class IntakeCommand extends CommandBase {
     
     IntakeSubsystem intakeSubsystem;
-    //SpinnerSubsystem spinnerSubsystem;
+    SpinnerSubsystem spinnerSubsystem;
     Joystick controller1;
     XboxController controller2;
 
-    public IntakeCommand(IntakeSubsystem intakeSubsystem, XboxController controller2, Joystick controller1)  {
+    public IntakeCommand(IntakeSubsystem intakeSubsystem, SpinnerSubsystem spinnerSubsystem, XboxController controller2, Joystick controller1)  {
         this.intakeSubsystem = intakeSubsystem;
-        //this.spinnerSubsystem = spinnerSubsystem;
+        this.spinnerSubsystem = spinnerSubsystem;
         this.controller1 = controller1;
         this.controller2 = controller2;
         addRequirements(intakeSubsystem);
-        //addRequirements(spinnerSubsystem);
+        addRequirements(spinnerSubsystem);
     }
 
     @Override
     public void execute()   {
         if (controller2.getRightBumper())   {
-            intakeSubsystem.intakeOn();
+           intakeSubsystem.intakeOn();
         }
-        // else if (controller2.getLeftY() < -.2){
-        //     intakeSubsystem.intakeReverse();
-        // }
+        else if (controller2.getLeftY() < -.2){
+            intakeSubsystem.intakeReverse();
+        }
         else    {
-           intakeSubsystem.intakeOff();
-            // if (intakeSubsystem.isCone())   {
-            //     spinnerSubsystem.spin();
-            // }
+          intakeSubsystem.intakeOff();
+            if (intakeSubsystem.isCone())   {
+                spinnerSubsystem.spin();
+            }
         }
-        // if (controller2.getBButton())   {
-        //     spinnerSubsystem.spin();
-        // }
-        // else {
-        //     spinnerSubsystem.stop();
-        // }
-        //spinnerSubsystem.spin();
+        if (controller2.getBButton())   {
+            spinnerSubsystem.spin();
+        }
+        else {
+            spinnerSubsystem.stop();
+        }
+        spinnerSubsystem.spin();
         
 
         if (controller2.getLeftBumper())    {
-            if (intakeSubsystem.status()){
-                intakeSubsystem.release();
-            }
-            else    {
-                intakeSubsystem.grab();
-            }
+            intakeSubsystem.grab();
+        }
+        else    {
+            intakeSubsystem.release();
         }
     }
 

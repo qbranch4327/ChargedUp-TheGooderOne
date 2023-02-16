@@ -1,5 +1,6 @@
 package frc.robot.autos;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import com.pathplanner.lib.PathConstraints;
 import com.pathplanner.lib.PathPlanner;
@@ -25,11 +26,12 @@ public class AutonPaths {
     VomitCommand vomit;
     AutonIntakeCommand intake;    
     String path;
+    String[] paths = {"Blue Auton 1", "Blue Auton 1 Platform", "Blue Auton 2 Bottom Cube","Blue Auton 2 Top Cube", "Blue Auton 2 Down","Blue Auton 2 Middle","Blue Auton 2 Up","Blue Auton 3","Blue Auton 3 Platform","Red Auton 1","Red Auton 1 Platform","Red Auton 2 Bottom Cube","Red Auton 2 Top Cube","Red Auton 2 Down","Red Auton 2 Middle","Red Auton 2 Up","Red Auton 3","Red Auton 3 Platform"};
+    
 
-    public AutonPaths(Swerve swerve, IntakeSubsystem intakesub, String path) {
+    public AutonPaths(Swerve swerve, IntakeSubsystem intakesub) {
         this.swerve = swerve;
         this.intakesub = intakesub;
-        this.path = path;
         vomit = new VomitCommand(intakesub); 
         intake = new AutonIntakeCommand(intakesub, null);
         subsystems = new Subsystem[]{swerve};
@@ -46,8 +48,8 @@ public class AutonPaths {
             );
     }
     
-    public CommandBase getAuto(){
-        PathPlannerTrajectory testPath = PathPlanner.loadPath(path, new PathConstraints(4, 3));
+    public CommandBase getAuto(int index){
+        PathPlannerTrajectory testPath = PathPlanner.loadPath(paths[index], new PathConstraints(4, 3));
         
         HashMap<String, Command> eventMap = new HashMap<>();
         eventMap.put("vomitCargo", vomit);
