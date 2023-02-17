@@ -42,25 +42,31 @@ public class RobotContainer {
 
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
-    private final PathPlannerTest pathPlannerTest;
-    private final AutonPaths blue1;
-    // private final AutonPaths blue1Plat;
-    // private final AutonPaths blue2BCube;
-    // private final AutonPaths blue2TCube;
-    // private final AutonPaths blue2Down;
-    // private final AutonPaths blue2Mid;
-    // private final AutonPaths blue2Up;
-    // private final AutonPaths blue3;
-    // private final AutonPaths blue3Plat;
-    // private final AutonPaths red1;
-    // private final AutonPaths red1Plat;
-    // private final AutonPaths red2BCube;
-    // private final AutonPaths red2TCube;
-    // private final AutonPaths red2Down;
-    // private final AutonPaths red2Mid;
-    // private final AutonPaths red2Up;
-    // private final AutonPaths red3;
-    // private final AutonPaths red3Plat;
+    // private final PathPlannerTest pathPlannerTest;
+
+    /* Paths */
+    private final pathBuilder pathBuilder;
+    private static final String[] paths = {
+        // "TEST",
+        "Blue Auton 1",
+        "Blue Auton 1 PLATFORM", 
+        "Blue Auton 2 BOTTOM CUBE",
+        "Blue Auton 2 TOP CUBE", 
+        "Blue Auton 2 DOWN",
+        "Blue Auton 2 MIDDLE",
+        "Blue Auton 2 UP",
+        "Blue Auton 3",
+        "Blue Auton 3 PLATFORM",
+        "Red Auton 1",
+        "Red Auton 1 PLATFORM",
+        "Red Auton 2 BOTTOM CUBE",
+        "Red Auton 2 TOP CUBE",
+        "Red Auton 2 DOWN",
+        "Red Auton 2 MIDDLE",
+        "Red Auton 2 UP",
+        "Red Auton 3",
+        "Red Auton 3 PLATFORM"
+        };
 
     SendableChooser<Command> qChooser = new SendableChooser<>();
 
@@ -73,45 +79,14 @@ public class RobotContainer {
         this.iSub = new IntakeSubsystem();
         this.sSub = new SpinnerSubsystem();
         //this.vision = new VisionSubsystem();
-        pathPlannerTest = new PathPlannerTest(s_Swerve, iSub);
-        blue1 = new AutonPaths(s_Swerve, iSub);
-        // blue1Plat = new AutonPaths(s_Swerve, iSub);
-        // blue2BCube = new AutonPaths(s_Swerve, iSub);
-        // blue2TCube = new AutonPaths(s_Swerve, iSub);
-        // blue2Down = new AutonPaths(s_Swerve, iSub);
-        // blue2Mid = new AutonPaths(s_Swerve, iSub);
-        // blue2Up = new AutonPaths(s_Swerve, iSub);
-        // blue3 = new AutonPaths(s_Swerve, iSub);
-        // blue3Plat = new AutonPaths(s_Swerve, iSub);
-        // red1 = new AutonPaths(s_Swerve, iSub);
-        // red1Plat = new AutonPaths(s_Swerve, iSub);
-        // red2BCube = new AutonPaths(s_Swerve, iSub);
-        // red2TCube = new AutonPaths(s_Swerve, iSub);
-        // red2Down = new AutonPaths(s_Swerve, iSub);
-        // red2Mid = new AutonPaths(s_Swerve, iSub);
-        // red2Up = new AutonPaths(s_Swerve, iSub);
-        // red3 = new AutonPaths(s_Swerve, iSub);
-        // red3Plat = new AutonPaths(s_Swerve, iSub);
+        this.pathBuilder = new pathBuilder(s_Swerve, iSub);
+        // pathPlannerTest = new PathPlannerTest(s_Swerve, iSub);
 
-        qChooser.setDefaultOption("test", pathPlannerTest.getAuto());
-        qChooser.addOption("Blue Auton 1", blue1.getAuto(0));
-        // qChooser.addOption("Blue Auton 1 Platform", blue1Plat.getAuto(1));
-        // qChooser.addOption("Blue Auton 2 Bottom Cube", blue2BCube.getAuto(2));
-        // qChooser.addOption("Blue Auton 2 Top Cube", blue2TCube.getAuto(3));
-        // qChooser.addOption("Blue Auton 2 Down", blue2Down.getAuto(4));
-        // qChooser.addOption("Blue Auton 2 Middle", blue2Mid.getAuto(5));
-        // qChooser.addOption("Blue Auton 2 Up", blue2Up.getAuto(6));
-        // qChooser.addOption("Blue Auton 3", blue3.getAuto(7));
-        // qChooser.addOption("Blue Auton 3 Platform", blue3Plat.getAuto(8));
-        // qChooser.addOption("Red Auton 1", red1.getAuto(9));
-        // qChooser.addOption("Red Auton 1 Platform", red1Plat.getAuto(10));
-        // qChooser.addOption("Red Auton 2 Bottom Cube", red2BCube.getAuto(11));
-        // qChooser.addOption("Red Auton 2 Top Cube", red2TCube.getAuto(12));
-        // qChooser.addOption("Red Auton 2 Down", red2Down.getAuto(13));
-        // qChooser.addOption("Red Auton 2 Middle", red2Mid.getAuto(14));
-        // qChooser.addOption("Red Auton 2 Up", red2Up.getAuto(15));
-        // qChooser.addOption("Red Auton 3", red3.getAuto(16));
-        // qChooser.addOption("Red Auton 3 Platform", red3Plat.getAuto(17));
+        // Automatically adds paths from the paths array. The path name at index 0 is set to the default.
+        qChooser.setDefaultOption(paths[0], pathBuilder.getAuto(paths[0]));
+        for(int i = 1; i < paths.length; i++)  {
+            qChooser.addOption(paths[i], pathBuilder.getAuto(paths[i]));
+        }
 
         SmartDashboard.putData(qChooser);
 
