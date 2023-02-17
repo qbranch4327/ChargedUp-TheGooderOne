@@ -17,7 +17,7 @@ import frc.robot.Constants;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 
-public class AutonPaths {
+public class pathBuilder {
 
     Swerve swerve;
     Subsystem[] subsystems;
@@ -26,29 +26,8 @@ public class AutonPaths {
     VomitCommand vomit;
     AutonIntakeCommand intake;    
     String path;
-    String[] paths = {
-        "Blue Auton 1",
-        "Blue Auton 1 PLATFORM", 
-        "Blue Auton 2 BOTTOM CUBE",
-        "Blue Auton 2 TOP CUBE", 
-        "Blue Auton 2 DOWN",
-        "Blue Auton 2 MIDDLE",
-        "Blue Auton 2 UP",
-        "Blue Auton 3",
-        "Blue Auton 3 PLATFROM",
-        "Red Auton 1",
-        "Red Auton 1 PLATFORM",
-        "Red Auton 2 BOTTOM CUBE",
-        "Red Auton 2 TOP CUBE",
-        "Red Auton 2 DOWN",
-        "Red Auton 2 MIDDLE",
-        "Red Auton 2 UP",
-        "Red Auton 3",
-        "Red Auton 3 PLATFORM"
-        };
-    
 
-    public AutonPaths(Swerve swerve, IntakeSubsystem intakeSub) {
+    public pathBuilder(Swerve swerve, IntakeSubsystem intakeSub) {
         this.swerve = swerve;
         this.intakeSub = intakeSub;
         vomit = new VomitCommand(intakeSub); 
@@ -67,8 +46,8 @@ public class AutonPaths {
             );
     }
     
-    public CommandBase getAuto(int index){
-        PathPlannerTrajectory pathTrajectory = PathPlanner.loadPath(paths[index], new PathConstraints(4, 3));
+    public CommandBase getAuto(String pathName){
+        PathPlannerTrajectory pathTrajectory = PathPlanner.loadPath(pathName, new PathConstraints(4, 3));
         
         HashMap<String, Command> eventMap = new HashMap<>();
         eventMap.put("vomitCargo", vomit);
