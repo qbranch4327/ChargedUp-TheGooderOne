@@ -22,19 +22,38 @@ public class AutonPaths {
     Swerve swerve;
     Subsystem[] subsystems;
     SwerveAutoBuilder builder;
-    IntakeSubsystem intakesub;
+    IntakeSubsystem intakeSub;
     VomitCommand vomit;
     AutonIntakeCommand intake;    
     String path;
-    String[] paths = {"Blue Auton 1", "Blue Auton 1 Platform", "Blue Auton 2 Bottom Cube","Blue Auton 2 Top Cube", "Blue Auton 2 Down","Blue Auton 2 Middle","Blue Auton 2 Up","Blue Auton 3","Blue Auton 3 Platform","Red Auton 1","Red Auton 1 Platform","Red Auton 2 Bottom Cube","Red Auton 2 Top Cube","Red Auton 2 Down","Red Auton 2 Middle","Red Auton 2 Up","Red Auton 3","Red Auton 3 Platform"};
+    String[] paths = {
+        "Blue Auton 1",
+        "Blue Auton 1 PLATFORM", 
+        "Blue Auton 2 BOTTOM CUBE",
+        "Blue Auton 2 TOP CUBE", 
+        "Blue Auton 2 DOWN",
+        "Blue Auton 2 MIDDLE",
+        "Blue Auton 2 UP",
+        "Blue Auton 3",
+        "Blue Auton 3 PLATFROM",
+        "Red Auton 1",
+        "Red Auton 1 PLATFORM",
+        "Red Auton 2 BOTTOM CUBE",
+        "Red Auton 2 TOP CUBE",
+        "Red Auton 2 DOWN",
+        "Red Auton 2 MIDDLE",
+        "Red Auton 2 UP",
+        "Red Auton 3",
+        "Red Auton 3 PLATFORM"
+        };
     
 
-    public AutonPaths(Swerve swerve, IntakeSubsystem intakesub) {
+    public AutonPaths(Swerve swerve, IntakeSubsystem intakeSub) {
         this.swerve = swerve;
-        this.intakesub = intakesub;
-        vomit = new VomitCommand(intakesub); 
-        intake = new AutonIntakeCommand(intakesub, null);
-        subsystems = new Subsystem[]{swerve};
+        this.intakeSub = intakeSub;
+        vomit = new VomitCommand(intakeSub); 
+        intake = new AutonIntakeCommand(intakeSub, null);
+        subsystems = new Subsystem[]{swerve, intakeSub};
         this.builder = new SwerveAutoBuilder(
             swerve::getPose, 
             swerve::resetOdometry, 
@@ -49,15 +68,15 @@ public class AutonPaths {
     }
     
     public CommandBase getAuto(int index){
-        PathPlannerTrajectory testPath = PathPlanner.loadPath(paths[index], new PathConstraints(4, 3));
+        PathPlannerTrajectory pathTrajectory = PathPlanner.loadPath(paths[index], new PathConstraints(4, 3));
         
         HashMap<String, Command> eventMap = new HashMap<>();
         eventMap.put("vomitCargo", vomit);
         eventMap.put("intakeCone", intake);
 
         FollowPathWithEvents command = new FollowPathWithEvents(
-            builder.followPath(testPath),
-            testPath.getMarkers(),
+            builder.followPath(pathTrajectory),
+            pathTrajectory.getMarkers(),
             eventMap
         );
 
