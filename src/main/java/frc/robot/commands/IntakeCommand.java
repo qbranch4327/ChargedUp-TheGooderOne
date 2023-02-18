@@ -32,7 +32,6 @@ public class IntakeCommand extends CommandBase {
         else    {
           intakeSubsystem.intakeOff();
         }
-
         if (controller2.getLeftX()>.2)   {
             spinnerSubsystem.spin(true);
         }
