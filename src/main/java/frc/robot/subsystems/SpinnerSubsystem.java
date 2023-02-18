@@ -11,8 +11,13 @@ public class SpinnerSubsystem extends SubsystemBase {
         spinnerMotor = new PWMSparkMax(3);
     }
 
-    public void spin()  {
-        spinnerMotor.set(0.2);
+    public void spin(boolean dir)  {
+        if (dir){
+            spinnerMotor.set(0.2);
+        }
+        else{
+            spinnerMotor.set(-0.2);
+        }
     }
 
     public void stop(){
