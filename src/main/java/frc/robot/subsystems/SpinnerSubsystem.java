@@ -23,7 +23,6 @@ public class SpinnerSubsystem extends SubsystemBase {
         else{
             spinnerMotor.set(-0.2);
         }
-        
     }
 
     public void stop(){
