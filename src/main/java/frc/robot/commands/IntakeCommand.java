@@ -35,6 +35,7 @@ public class IntakeCommand extends CommandBase {
                 spinnerSubsystem.spin();
             }
         }
+        
         if (controller2.getBButton())   {
             spinnerSubsystem.spin();
         }
