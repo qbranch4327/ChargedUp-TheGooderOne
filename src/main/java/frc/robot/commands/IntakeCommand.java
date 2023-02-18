@@ -31,13 +31,12 @@ public class IntakeCommand extends CommandBase {
         }
         else    {
           intakeSubsystem.intakeOff();
-            if (intakeSubsystem.isCone())   {
-                spinnerSubsystem.spin();
-            }
         }
-        
-        if (controller2.getBButton())   {
-            spinnerSubsystem.spin();
+        if (controller2.getLeftX()>.2)   {
+            spinnerSubsystem.spin(true);
+        }
+        else if (controller2.getLeftX()<-.2){
+            spinnerSubsystem.spin(false);
         }
         else {
             spinnerSubsystem.stop();
