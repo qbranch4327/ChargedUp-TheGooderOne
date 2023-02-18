@@ -1,7 +1,5 @@
 package frc.robot.subsystems;
 
-//import com.revrobotics.CANSparkMax;
-//import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -17,30 +15,19 @@ public class IntakeSubsystem extends SubsystemBase {
     DoubleSolenoid grip1 = new DoubleSolenoid(PneumaticsModuleType.REVPH, 1, 0);
 
     public IntakeSubsystem()    {
-        //intakeMotor.setInverted(true);
         // intake1 = new DoubleSolenoid(PneumaticsModuleType.REVPH, 4, 5);
         // intake2 = new DoubleSolenoid(PneumaticsModuleType.REVPH, 6, 7);
     }
 
-    public void intakeOn()  {
-        intakeMotor.set(-1);
-        // intake1.set(DoubleSolenoid.Value.kForward);
-        // intake2.set(DoubleSolenoid.Value.kForward);
-    }
-
-    //public void intakeOn(boolean reverse)  {
-        // if (!reverse)    {
-            // intakeMotor.set(0.5);
-        //}
-        // else {
-            // intakeMotor.set(-.5);
-        //}
-        // intake1.set(DoubleSolenoid.Value.kForward);
-        // intake2.set(DoubleSolenoid.Value.kForward);
-    //}
-
-    public void intakeReverse(){
-        intakeMotor.set(-1);
+    public void intakeOn(boolean reverse)  {
+        if (!reverse)    {
+            intakeMotor.set(0.5);
+        }
+        else {
+            intakeMotor.set(-.5);
+        }
+        intake1.set(DoubleSolenoid.Value.kForward);
+        intake2.set(DoubleSolenoid.Value.kForward);
     }
 
     public void intakeOff() {

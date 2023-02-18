@@ -1,7 +1,5 @@
 package frc.robot;
 
-import org.opencv.objdetect.QRCodeDetector;
-
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -26,7 +24,6 @@ public class RobotContainer {
     private final XboxController driver2 = new XboxController(1);
     private final ElevatorSubsystem eSub;
     private final TiltSubsystem tSub;
-    //private final GripSubsystem gSub;
     private final IntakeSubsystem iSub;
     private final SpinnerSubsystem sSub;
     //private final VisionSubsystem vision;
@@ -70,7 +67,6 @@ public class RobotContainer {
 
     SendableChooser<Command> qChooser = new SendableChooser<>();
 
-
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
     public RobotContainer() {
 
@@ -92,7 +88,6 @@ public class RobotContainer {
 
         eSub.setDefaultCommand(new ElevatorCommand(eSub, tSub, driver2));
         iSub.setDefaultCommand(new IntakeCommand(iSub, sSub, driver2, driver));
-        sSub.setDefaultCommand(new SpinnerCommand(sSub, driver2));
 
         s_Swerve.setDefaultCommand(
             new TeleopSwerve(
@@ -127,7 +122,6 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
-        // return qChooser.getSelected();
         return qChooser.getSelected();
     }
 }

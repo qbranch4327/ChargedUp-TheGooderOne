@@ -22,7 +22,6 @@ public class Swerve extends SubsystemBase {
     public SwerveDriveOdometry swerveOdometry;
     public SwerveModule[] mSwerveMods;
     private AHRS gyro;
-    // private final SerialPort USB1 = new SerialPort(9600, Port.kUSB);
 
     public Swerve() {
         gyro = new AHRS(I2C.Port.kOnboard);
