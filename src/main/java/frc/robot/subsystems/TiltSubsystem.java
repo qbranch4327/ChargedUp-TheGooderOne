@@ -1,28 +1,18 @@
 package frc.robot.subsystems;
 
-//import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-//import com.revrobotics.CANSparkMax;
-//import com.revrobotics.CANSparkMaxLowLevel.MotorType; 
-import java.lang.Math;
 
 public class TiltSubsystem extends SubsystemBase  {
     
     PWMSparkMax tiltMotor;
     DutyCycleEncoder tiltEncoder;
-    // private final int CyclesPerRevolution = 2048;
-    // private final double circumference = 1.76 * Math.PI;
     private final double holdingV = -0.3;
-    private final double tiltOffset = -0.2;
-
     public TiltSubsystem()    {
         tiltMotor = new PWMSparkMax(1);
         tiltEncoder = new DutyCycleEncoder(2);
-        // tiltEncoder.setDistancePerRotation(circumference/CyclesPerRevolution);
-        // tiltEncoder.setDutyCycleRange(Data.n("restDegree"), Data.n("upperDegree"));
     }
 
     public void tiltDown(double degrees)    {
@@ -53,10 +43,6 @@ public class TiltSubsystem extends SubsystemBase  {
             tiltMotor.stopMotor();
         }
     }
-
-   // public void resetEncoders() {
-   //     tiltEncoder.reset();
-   // }
 
     public boolean encoderCheck(double distance){
         if (tiltEncoder.getAbsolutePosition() == distance)  {

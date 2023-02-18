@@ -26,7 +26,7 @@ public class AutonIntakeCommand extends CommandBase{
     public void execute() {
         
         if (timer.get() == startTime)   {
-            intakeSubsystem.intakeOn();
+            intakeSubsystem.intakeOn(true);
         }
         if (position)   {
             intakeSubsystem.grab();

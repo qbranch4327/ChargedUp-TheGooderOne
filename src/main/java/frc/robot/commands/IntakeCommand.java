@@ -1,9 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
-//import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.XboxController;
-//import edu.wpi.first.wpilibj.PS4Controller.Axis;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.*;
 
@@ -26,10 +24,10 @@ public class IntakeCommand extends CommandBase {
     @Override
     public void execute()   {
         if (controller2.getRightBumper())   {
-           intakeSubsystem.intakeOn();
+           intakeSubsystem.intakeOn(true);
         }
         else if (controller2.getLeftY() < -.2){
-            intakeSubsystem.intakeReverse();
+            intakeSubsystem.intakeOn(false);
         }
         else    {
           intakeSubsystem.intakeOff();
@@ -37,14 +35,13 @@ public class IntakeCommand extends CommandBase {
                 spinnerSubsystem.spin();
             }
         }
+        
         if (controller2.getBButton())   {
             spinnerSubsystem.spin();
         }
         else {
             spinnerSubsystem.stop();
-        }
-        spinnerSubsystem.spin();
-        
+        }        
 
         if (controller2.getLeftBumper())    {
             intakeSubsystem.grab();
