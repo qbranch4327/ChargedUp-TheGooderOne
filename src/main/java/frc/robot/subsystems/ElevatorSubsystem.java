@@ -22,10 +22,10 @@ public class ElevatorSubsystem extends SubsystemBase{
             elevator.set(0.35);
         }
         else if(elevatorEncoder.getDistance() <= distance - 200){
-            elevator.set(-0.15);
+            elevator.set(-0.20);
         }
         else{
-            elevator.stopMotor();
+            elevator.set(.10);;
         }
     }
     
@@ -38,7 +38,7 @@ public class ElevatorSubsystem extends SubsystemBase{
     }
 
     public void goDown(double distance)  {
-        elevator.set(-0.1);
+        elevator.set(-0.20);
         if (elevatorEncoder.getDistance() >= distance)  {
            elevator.stopMotor();
         }

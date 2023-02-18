@@ -40,9 +40,7 @@ public class IntakeCommand extends CommandBase {
         }
         else {
             spinnerSubsystem.stop();
-        }
-        spinnerSubsystem.spin();
-        
+        }        
 
         if (controller2.getLeftBumper())    {
             intakeSubsystem.grab();
