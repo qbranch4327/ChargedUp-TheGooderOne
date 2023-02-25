@@ -16,8 +16,6 @@ public class IntakeSubsystem extends SubsystemBase {
 
     public IntakeSubsystem()    {
         intakeMotor.setInverted(true);
-        // intake1 = new DoubleSolenoid(PneumaticsModuleType.REVPH, 4, 5);
-        // intake2 = new DoubleSolenoid(PneumaticsModuleType.REVPH, 6, 7);
     }
 
     public void intakeOn(boolean forward)  {
@@ -31,10 +29,6 @@ public class IntakeSubsystem extends SubsystemBase {
 
     public void intakeOff() {
         intakeMotor.stopMotor();
-        // intake1.set(DoubleSolenoid.Value.kReverse);
-        // intake2.set(DoubleSolenoid.Value.kReverse);
-        // intake1.set(DoubleSolenoid.Value.kOff);
-        // intake2.set(DoubleSolenoid.Value.kOff);
     }
 
     public boolean isCone()     {
