@@ -47,8 +47,8 @@ public class pathBuilder {
         PathPlannerTrajectory pathTrajectory = PathPlanner.loadPath(pathName, new PathConstraints(4, 3));
         
         HashMap<String, Command> eventMap = new HashMap<>();
-        eventMap.put("vomitCargo", vomit);
-        eventMap.put("intakeCone", intake);
+        // eventMap.put("vomitCargo", vomit);
+        // eventMap.put("intakeCone", intake);
 
         FollowPathWithEvents command = new FollowPathWithEvents(
             builder.followPath(pathTrajectory),
