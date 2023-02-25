@@ -20,11 +20,7 @@ public class SpinnerSubsystem extends SubsystemBase {
         if (dir){
             spinnerMotor.set(0.2);
         }
-<<<<<<< HEAD
-        else {
-=======
         else{
->>>>>>> 3f49c0e4ef27028499e2431d57970a523da31999
             spinnerMotor.set(-0.2);
         }
     }

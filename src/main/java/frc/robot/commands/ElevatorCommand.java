@@ -35,13 +35,8 @@ public class ElevatorCommand extends CommandBase {
             elevatorSubsystem.goUp(-10022);
             tiltSubsystem.tiltDown(0.1);
         }
-<<<<<<< HEAD
         else    {
             elevatorSubsystem.goDown(-750);
-=======
-        else{
-            elevatorSubsystem.goDown(0);
->>>>>>> 3f49c0e4ef27028499e2431d57970a523da31999
             tiltSubsystem.tiltUp(homeValue);
         }
     }
