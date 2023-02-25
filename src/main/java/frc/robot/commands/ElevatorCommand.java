@@ -35,7 +35,7 @@ public class ElevatorCommand extends CommandBase {
             elevatorSubsystem.goUp(-10022);
             tiltSubsystem.tiltDown(0.1);
         }
-        else if (controller.getAButton())    {
+        else    {
             elevatorSubsystem.goDown(-750);
             tiltSubsystem.tiltUp(homeValue);
         }

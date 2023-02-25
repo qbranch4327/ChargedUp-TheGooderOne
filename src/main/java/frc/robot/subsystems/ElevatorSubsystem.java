@@ -25,7 +25,7 @@ public class ElevatorSubsystem extends SubsystemBase{
             elevator.set(-0.20);
         }
         else{
-            elevator.set(.10);;
+            elevator.stopMotor();
         }
     }
     
