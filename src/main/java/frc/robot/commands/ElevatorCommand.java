@@ -9,7 +9,7 @@ public class ElevatorCommand extends CommandBase {
     XboxController controller;
     ElevatorSubsystem elevatorSubsystem;
     TiltSubsystem tiltSubsystem;
-    private final double homeValue = 0.8;
+    private final double homeValue = 0.18;
 
     public ElevatorCommand(ElevatorSubsystem eSubsystem, TiltSubsystem tSubsystem, XboxController controller)  {
         this.controller = controller;
@@ -29,11 +29,11 @@ public class ElevatorCommand extends CommandBase {
     public void execute()   {
         if (controller.getYButton())    {
             elevatorSubsystem.goUp(-13800);
-            tiltSubsystem.tiltDown(0.3);
+            tiltSubsystem.tiltDown(0.41);
         }
         else if (controller.getXButton())    {
             elevatorSubsystem.goUp(-10022);
-            tiltSubsystem.tiltDown(0.1);
+            tiltSubsystem.tiltDown(0.41);
         }
         else    {
             elevatorSubsystem.goDown(-750);

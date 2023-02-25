@@ -16,11 +16,11 @@ public class TiltSubsystem extends SubsystemBase  {
     }
 
     public void tiltDown(double degrees)    {
-        if (tiltEncoder.getAbsolutePosition() >= degrees + 0.03)   {
+        if (tiltEncoder.getAbsolutePosition() >= degrees + 0.01)   {
             tiltMotor.set(0.15);
         }
-        else if(tiltEncoder.getAbsolutePosition() <= degrees - 0.03){
-            tiltMotor.set(-0.25);
+        else if(tiltEncoder.getAbsolutePosition() <= degrees - 0.01){
+            tiltMotor.set(0.15);
         }
         else{
             tiltMotor.set(holdingV);
@@ -36,7 +36,7 @@ public class TiltSubsystem extends SubsystemBase  {
     }
 
     public void tiltUp(double degrees)    {
-        if (tiltEncoder.getAbsolutePosition() >= degrees + 0.03 || tiltEncoder.getAbsolutePosition() <= degrees - 0.03)   {
+        if (tiltEncoder.getAbsolutePosition() >= degrees + 0.01 || tiltEncoder.getAbsolutePosition() <= degrees - 0.01)   {
             tiltMotor.set(-0.25);
         }
         else{
