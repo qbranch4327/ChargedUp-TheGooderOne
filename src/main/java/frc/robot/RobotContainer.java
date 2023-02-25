@@ -78,13 +78,10 @@ public class RobotContainer {
         this.pathBuilder = new pathBuilder(s_Swerve, iSub);
 
         // Automatically adds paths from the paths array. The path name at index 0 is set to the default.
-        qChooser.setDefaultOption("TEST", pathBuilder.getAuto("TEST"));
-        // qChooser.addOption("Blue Auton 1", pathBuilder.getAuto(paths[i]));
-        // qChooser.addOption("Blue Auton 1 PLATFORM", pathBuilder.getAuto(paths[i]));
-        // qChooser.setDefaultOption(paths[0], pathBuilder.getAuto(paths[0]));
-        // for(int i = 1; i < paths.length; i++)  {
-        //     qChooser.addOption(paths[i], pathBuilder.getAuto(paths[i]));
-        // }
+        qChooser.setDefaultOption(paths[0], pathBuilder.getAuto(paths[0]));
+        for(int i = 1; i < paths.length; i++)  {
+            qChooser.addOption(paths[i], pathBuilder.getAuto(paths[i]));
+        }
 
         SmartDashboard.putData(qChooser);
 
