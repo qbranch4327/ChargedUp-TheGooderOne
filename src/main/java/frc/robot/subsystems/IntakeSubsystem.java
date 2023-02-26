@@ -44,7 +44,7 @@ public class IntakeSubsystem extends SubsystemBase {
     }
 
     public void vomit() {
-        intakeMotor.set(1);
+        intakeMotor.set(-1);
     }
 
     public boolean status(){

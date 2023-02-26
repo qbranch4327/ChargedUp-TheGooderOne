@@ -1,0 +1,17 @@
+package frc.robot.commands;
+
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+public class print extends CommandBase{
+    String mes;
+    
+    public print(){
+        mes = new String("hello");
+    }
+
+    @Override
+    public void execute(){
+        SmartDashboard.putString("testing", mes);
+    }
+}

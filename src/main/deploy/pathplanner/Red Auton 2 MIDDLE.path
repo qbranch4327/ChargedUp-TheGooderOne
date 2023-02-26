@@ -16,19 +16,21 @@
       "isLocked": false,
       "isStopPoint": false,
       "stopEvent": {
-        "names": [],
+        "names": [
+          "vomitCargo"
+        ],
         "executionBehavior": "parallel",
-        "waitBehavior": "none",
-        "waitTime": 0
+        "waitBehavior": "before",
+        "waitTime": 1.0
       }
     },
     {
       "anchorPoint": {
-        "x": 12.66,
+        "x": 9.5,
         "y": 2.75
       },
       "prevControl": {
-        "x": 13.66,
+        "x": 10.5,
         "y": 2.75
       },
       "nextControl": null,
