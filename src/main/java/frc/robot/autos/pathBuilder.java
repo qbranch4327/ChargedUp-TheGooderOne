@@ -23,13 +23,17 @@ public class pathBuilder {
     VomitCommand vomit;
     AutonIntakeCommand intake;    
     String path;
+    HashMap<String, Command> eventMap = new HashMap<>();
+
 
     public pathBuilder(Swerve swerve, IntakeSubsystem intakeSub) {
         this.swerve = swerve;
         this.intakeSub = intakeSub;
         vomit = new VomitCommand(intakeSub); 
         intake = new AutonIntakeCommand(intakeSub, null);
-        subsystems = new Subsystem[]{swerve, intakeSub};
+        subsystems = new Subsystem[]{swerve};
+        
+        eventMap.put("vomitCargo", vomit);
         this.builder = new SwerveAutoBuilder(
             swerve::getPose, 
             swerve::resetOdometry, 
@@ -37,17 +41,17 @@ public class pathBuilder {
             new PIDConstants(0.05, 0, 0),
             new PIDConstants(0.05, 0, 0), 
             swerve::setModuleStates, 
-            new HashMap<>(), 
+            eventMap, 
             // true,
             subsystems
             );
+            
     }
     
     public CommandBase getAuto(String pathName){
+        // Consider use of loadPathGroup here
         PathPlannerTrajectory pathTrajectory = PathPlanner.loadPath(pathName, new PathConstraints(4, 3));
         
-        HashMap<String, Command> eventMap = new HashMap<>();
-        // eventMap.put("vomitCargo", vomit);
         // eventMap.put("intakeCone", intake);
 
         FollowPathWithEvents command = new FollowPathWithEvents(
