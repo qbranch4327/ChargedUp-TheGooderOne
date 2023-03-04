@@ -30,11 +30,11 @@ public class ElevatorSubsystem extends SubsystemBase{
     }
     
     public void goUp()  {
-        elevator.set(.2);
+        elevator.set(.5);
     }
     
     public void goDown(){
-        elevator.set(-.1);
+        elevator.set(-.3);
     }
 
     public void goDown(double distance)  {
@@ -62,6 +62,10 @@ public class ElevatorSubsystem extends SubsystemBase{
             return true;
         }
         return false;
+    }
+
+    public double encoderValue(){
+        return elevatorEncoder.getDistance();
     }
 
 }

@@ -2,13 +2,13 @@
   "waypoints": [
     {
       "anchorPoint": {
-        "x": 14.782274505166587,
-        "y": 2.75
+        "x": 1.761330702148584,
+        "y": 2.7520195211330596
       },
       "prevControl": null,
       "nextControl": {
-        "x": 14.793693673304068,
-        "y": 2.75
+        "x": 2.761330702148583,
+        "y": 2.7520195211330596
       },
       "holonomicAngle": 0,
       "isReversal": false,
@@ -16,23 +16,20 @@
       "isLocked": false,
       "isStopPoint": false,
       "stopEvent": {
-        "names": [
-          "vomitCargo",
-          "elevatorCommand"
-        ],
-        "executionBehavior": "sequential",
-        "waitBehavior": "deadline",
-        "waitTime": 2.0
+        "names": [],
+        "executionBehavior": "parallel",
+        "waitBehavior": "none",
+        "waitTime": 0
       }
     },
     {
       "anchorPoint": {
-        "x": 9.5,
-        "y": 2.75
+        "x": 6.180548771353953,
+        "y": 2.740600352995578
       },
       "prevControl": {
-        "x": 10.5,
-        "y": 2.75
+        "x": 6.612033762529064,
+        "y": 2.740600352995578
       },
       "nextControl": null,
       "holonomicAngle": 0,
@@ -42,11 +39,18 @@
       "isStopPoint": false,
       "stopEvent": {
         "names": [],
-        "executionBehavior": "sequential",
-        "waitBehavior": "deadline",
+        "executionBehavior": "parallel",
+        "waitBehavior": "none",
         "waitTime": 0
       }
     }
   ],
-  "markers": []
+  "markers": [
+    {
+      "position": 0.0,
+      "names": [
+        "vomit"
+      ]
+    }
+  ]
 }

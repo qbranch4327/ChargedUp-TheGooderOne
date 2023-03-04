@@ -17,7 +17,7 @@
       "isStopPoint": false,
       "stopEvent": {
         "names": [],
-        "executionBehavior": "parallel",
+        "executionBehavior": "sequential",
         "waitBehavior": "none",
         "waitTime": 0
       }
@@ -94,8 +94,8 @@
         "names": [
           "getCargo"
         ],
-        "executionBehavior": "parallel",
-        "waitBehavior": "none",
+        "executionBehavior": "sequential",
+        "waitBehavior": "deadline",
         "waitTime": 0
       }
     },
@@ -176,12 +176,6 @@
   ],
   "markers": [
     {
-      "position": 0.0,
-      "names": [
-        "vomitCargo"
-      ]
-    },
-    {
       "position": 2.0,
       "names": [
         "intakeDown"
@@ -191,6 +185,12 @@
       "position": 5.0,
       "names": [
         "loadCargo"
+      ]
+    },
+    {
+      "position": 0.0,
+      "names": [
+        "event"
       ]
     }
   ]

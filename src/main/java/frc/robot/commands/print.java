@@ -10,6 +10,10 @@ public class print extends CommandBase{
         mes = new String("hello");
     }
 
+    public print(String mes)    {
+        this.mes = mes;
+    }
+
     @Override
     public void execute(){
         SmartDashboard.putString("testing", mes);
