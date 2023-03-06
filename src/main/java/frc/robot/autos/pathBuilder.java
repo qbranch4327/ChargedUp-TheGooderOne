@@ -20,17 +20,19 @@ public class pathBuilder {
     Subsystem[] subsystems;
     SwerveAutoBuilder builder;
     IntakeSubsystem intakeSub;
+    SpinnerSubsystem spinnerSub;
     VomitCommand vomit;
     AutonIntakeCommand intake;    
     String path;
     HashMap<String, Command> eventMap = new HashMap<>();
 
 
-    public pathBuilder(Swerve swerve, IntakeSubsystem intakeSub) {
+    public pathBuilder(Swerve swerve, IntakeSubsystem intakeSub, SpinnerSubsystem spinnerSub) {
         this.swerve = swerve;
         this.intakeSub = intakeSub;
-        vomit = new VomitCommand(intakeSub); 
-        intake = new AutonIntakeCommand(intakeSub, null);
+        this.spinnerSub = spinnerSub;
+        vomit = new VomitCommand(intakeSub, spinnerSub); 
+        intake = new AutonIntakeCommand(intakeSub);
         subsystems = new Subsystem[]{swerve};
         
         eventMap.put("vomitCargo", vomit);

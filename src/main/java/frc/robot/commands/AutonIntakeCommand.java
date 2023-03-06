@@ -11,32 +11,28 @@ public class AutonIntakeCommand extends CommandBase{
     double endTime = 0;
     boolean position = true;
     
-    public AutonIntakeCommand(IntakeSubsystem intakeSubsystem, Timer timer) {
+    public AutonIntakeCommand(IntakeSubsystem intakeSubsystem) {
         this.intakeSubsystem = intakeSubsystem;
-        this.timer = timer;
+        timer = new Timer();
         addRequirements(intakeSubsystem);
     }
 
     @Override
     public void initialize() {
-        
+        timer.reset();
+        timer.start();
     }
 
     @Override
     public void execute() {
-        
-        if (timer.get() == startTime)   {
-            intakeSubsystem.intakeOn(true);
-        }
-        if (position)   {
-            intakeSubsystem.grab();
-        }
+        intakeSubsystem.intakeOn(true);
     }
 
     @Override
     public boolean isFinished() {
-        if (timer.get() == endTime) {
+        if (timer.get() > 1) {
             intakeSubsystem.intakeOff();
+            intakeSubsystem.grab();
             return true;
         }
         return false;

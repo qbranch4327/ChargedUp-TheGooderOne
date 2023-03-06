@@ -23,9 +23,12 @@ public class IntakeCommand extends CommandBase {
 
     @Override
     public void execute()   {
-        if (controller2.getRightBumper())   {
-           intakeSubsystem.intakeOn(true);
+        if (controller1.getRawButton(6)) {
+            intakeSubsystem.intakeOn(true);
         }
+        else if (controller2.getRightBumper())   {
+            intakeSubsystem.intakeOn(true);
+         }
         else if (controller2.getLeftY() < -.2){
             intakeSubsystem.intakeOn(false);
         }

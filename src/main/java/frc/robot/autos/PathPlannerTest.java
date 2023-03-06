@@ -22,6 +22,7 @@ public class PathPlannerTest {
     Subsystem[] subsystems;
     SwerveAutoBuilder builder;
     IntakeSubsystem intakesub;
+    SpinnerSubsystem spinnerSub;
     VomitCommand vomit;
     AutonIntakeCommand intake;
     print print;
@@ -31,8 +32,8 @@ public class PathPlannerTest {
         this.swerve = swerve;
         this.intakesub = intakesub;
         print = new print();
-        vomit = new VomitCommand(intakesub); 
-        intake = new AutonIntakeCommand(intakesub, null);
+        vomit = new VomitCommand(intakesub, spinnerSub); 
+        intake = new AutonIntakeCommand(intakesub);
         subsystems = new Subsystem[]{swerve};
         this.builder = new SwerveAutoBuilder(
             swerve::getPose, 
@@ -48,7 +49,7 @@ public class PathPlannerTest {
     }
     
     public CommandBase getAuto(){
-        PathPlannerTrajectory testPath = PathPlanner.loadPath("Blue Auton 2 MIDDLE", new PathConstraints(4, 3));
+        PathPlannerTrajectory testPath = PathPlanner.loadPath("Red Auton 2 MIDDLE", new PathConstraints(4, 3));
         
         HashMap<String, Command> eventMap = new HashMap<>();
         eventMap.put("test", print);
