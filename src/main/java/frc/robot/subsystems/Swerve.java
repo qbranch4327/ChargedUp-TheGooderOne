@@ -99,7 +99,13 @@ public class Swerve extends SubsystemBase {
     }
 
     public void dock()  {
-        
+        if (gyro.getPitch() > 0)    {
+
+        }
+    }
+
+    public float getPitch() {
+        return gyro.getPitch();
     }
 
     public void zeroGyro(){
@@ -125,6 +131,12 @@ public class Swerve extends SubsystemBase {
         mSwerveMods[1].setDesiredState(new SwerveModuleState(0.1, new Rotation2d(Math.PI * 0.25)), false);
         mSwerveMods[2].setDesiredState(new SwerveModuleState(0.1, new Rotation2d(Math.PI * 0.25)), false);
         mSwerveMods[3].setDesiredState(new SwerveModuleState(0.1, new Rotation2d(Math.PI * 0.75)), false);
+    }
+
+    public void slowDown()  {
+        for (int i = 0; i < mSwerveMods.length; i++)    {
+            mSwerveMods[i].setDesiredState(new SwerveModuleState(0.1, new Rotation2d(0)), false);
+        }
     }
 
     @Override
