@@ -98,11 +98,11 @@ public class Swerve extends SubsystemBase {
         return positions;
     }
 
-    public void dock()  {
-        if (gyro.getPitch() > 0)    {
+    // public void dock()  {
+    //     if (gyro.getPitch() > 0)    {
 
-        }
-    }
+    //     }
+    // }
 
     public float getPitch() {
         return gyro.getPitch();
