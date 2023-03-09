@@ -54,7 +54,7 @@ public class RobotContainer {
     // private final PathPlannerTest pathPlannerTest;
 
     /* Paths */
-    private final pathBuilder pathBuilder;
+    private final autoBuilder autoBuilder;
     private static final String[] paths = {
         // "TEST",
         "Blue Auton 1",
@@ -77,7 +77,7 @@ public class RobotContainer {
         "Red Auton 3 PLATFORM"
         };
 
-    SendableChooser<Command> qChooser = new SendableChooser<>();
+    SendableChooser<String> qChooser = new SendableChooser<>();
 
     Command autoTest;
 
@@ -89,39 +89,13 @@ public class RobotContainer {
         this.iSub = new IntakeSubsystem();
         this.sSub = new SpinnerSubsystem();
         //this.vision = new VisionSubsystem();
-        this.pathBuilder = new pathBuilder(s_Swerve, iSub, sSub);
-        
+        this.autoBuilder = new autoBuilder(s_Swerve, iSub, sSub, eSub);
 
-        // FOR USE WITH OLD PATHBUILDER ONLY //
-        
         // Automatically adds paths from the paths array. The path name at index 0 is set to the default.
-        // qChooser.setDefaultOption(paths[0], pathBuilder.getAuto(paths[0]));
-        // for(int i = 1; i < paths.length; i++)  {
-        //     qChooser.addOption(paths[i], pathBuilder.getAuto(paths[i]));
-        // }
-        
-        ArrayList<PathPlannerTrajectory> pathGroup = (ArrayList<PathPlannerTrajectory>) PathPlanner.loadPathGroup("Red Auton 2 MIDDLE", new PathConstraints(4, 3));
-
-        // This is just an example event map. It would be better to have a constant, global event map
-        // in your code that will be used by all path following commands.
-        HashMap<String, Command> eventMap = new HashMap<>();
-        eventMap.put("vomitCargo", new VomitCommand(iSub, sSub));
-        eventMap.put("elevatorCommand", new AutonElevatorCommand(eSub));
-
-        // Create the AutoBuilder. This only needs to be created once when robot code starts, not every time you want to create an auto command. A good place to put this is in RobotContainer along with your subsystems.
-        SwerveAutoBuilder autoBuilder = new SwerveAutoBuilder(
-            s_Swerve::getPose, // Pose2d supplier
-            s_Swerve::resetOdometry, // Pose2d consumer, used to reset odometry at the beginning of auto
-            Constants.Swerve.swerveKinematics, // SwerveDriveKinematics
-            new PIDConstants(0.05, 0.0, 0.0), // PID constants to correct for translation error (used to create the X and Y PID controllers)
-            new PIDConstants(0.05, 0.0, 0.0), // PID constants to correct for rotation error (used to create the rotation controller)
-            s_Swerve::setModuleStates, // Module states consumer used to output to the drive subsystem
-            eventMap,
-            true, // Should the path be automatically mirrored depending on alliance color. Optional, defaults to true
-            s_Swerve // The drive subsystem. Used to properly set the requirements of path following commands
-        );
-
-        autoTest = autoBuilder.fullAuto(pathGroup);
+        qChooser.setDefaultOption(paths[0], paths[0]);
+        for(int i = 1; i < paths.length; i++)  {
+            qChooser.addOption(paths[i], paths[i]);
+        }
 
         SmartDashboard.putData(qChooser);
 
@@ -163,7 +137,7 @@ public class RobotContainer {
      */
     public Command getAutonomousCommand() {
         // An ExampleCommand will run in autonomous
-        // return qChooser.getSelected();
-        return autoTest;
+        String selection = qChooser.getSelected();
+        return autoBuilder.getAuto(selection);
     }
 }
