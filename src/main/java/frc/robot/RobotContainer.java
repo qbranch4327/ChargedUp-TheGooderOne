@@ -1,15 +1,5 @@
 package frc.robot;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-
-import com.pathplanner.lib.PathConstraints;
-import com.pathplanner.lib.PathPlanner;
-import com.pathplanner.lib.PathPlannerTrajectory;
-import com.pathplanner.lib.auto.PIDConstants;
-import com.pathplanner.lib.auto.SwerveAutoBuilder;
-
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -18,7 +8,6 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.Constants;
 import frc.robot.autos.*;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
@@ -57,24 +46,10 @@ public class RobotContainer {
     private final autoBuilder autoBuilder;
     private static final String[] paths = {
         // "TEST",
-        "Blue Auton 1",
-        "Blue Auton 1 PLATFORM", 
-        "Blue Auton 2 BOTTOM CUBE",
-        "Blue Auton 2 TOP CUBE", 
-        "Blue Auton 2 DOWN",
-        "Blue Auton 2 MIDDLE",
-        "Blue Auton 2 UP",
-        "Blue Auton 3",
-        "Blue Auton 3 PLATFORM",
-        "Red Auton 1",
-        "Red Auton 1 PLATFORM",
-        "Red Auton 2 BOTTOM CUBE",
-        "Red Auton 2 TOP CUBE",
-        "Red Auton 2 DOWN",
         "Red Auton 2 MIDDLE",
-        "Red Auton 2 UP",
-        "Red Auton 3",
-        "Red Auton 3 PLATFORM"
+        "Blue Auton 2 MIDDLE",
+        "Red Auton 1",
+        "Red Auton 3"
         };
 
     SendableChooser<String> qChooser = new SendableChooser<>();

@@ -5,10 +5,8 @@ import java.util.HashMap;
 import com.pathplanner.lib.PathConstraints;
 import com.pathplanner.lib.PathPlanner;
 import com.pathplanner.lib.PathPlannerTrajectory;
-import com.pathplanner.lib.auto.BaseAutoBuilder;
 import com.pathplanner.lib.auto.PIDConstants;
 import com.pathplanner.lib.auto.SwerveAutoBuilder;
-import com.pathplanner.lib.commands.FollowPathWithEvents;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Subsystem;
@@ -35,7 +33,7 @@ public class autoBuilder {
         this.iSub = iSub;
         this.sSub = sSub;
         vomit = new VomitCommand(iSub, sSub); 
-        intake = new AutonIntakeCommand(iSub);
+        intake = new AutonIntakeCommand(iSub, swerve);
         subsystems = new Subsystem[]{swerve};
 
         // This is just an example event map. It would be better to have a constant, global event map
@@ -43,6 +41,7 @@ public class autoBuilder {
         HashMap<String, Command> eventMap = new HashMap<>();
         eventMap.put("vomitCargo", new VomitCommand(iSub, sSub));
         eventMap.put("elevatorCommand", new AutonElevatorCommand(eSub));
+        eventMap.put("dock", new DockCommand(swerve));
 
         // Create the AutoBuilder. This only needs to be created once when robot code starts, not every time you want to create an auto command. A good place to put this is in RobotContainer along with your subsystems.
         builder = new SwerveAutoBuilder(
@@ -61,7 +60,7 @@ public class autoBuilder {
     
     public Command getAuto(String pathName){
         // Consider use of loadPathGroup here
-        ArrayList<PathPlannerTrajectory> pathGroup = (ArrayList<PathPlannerTrajectory>) PathPlanner.loadPathGroup("pathName", new PathConstraints(4, 3));
+        ArrayList<PathPlannerTrajectory> pathGroup = (ArrayList<PathPlannerTrajectory>) PathPlanner.loadPathGroup(pathName, new PathConstraints(4, 3));
         CommandBase fullAuto = builder.fullAuto(pathGroup);
         return fullAuto;
     }    

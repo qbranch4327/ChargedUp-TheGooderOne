@@ -1,9 +1,9 @@
-package frc.robot.autos;
+// package frc.robot.autos;
 
-import java.util.HashMap;
+// import java.util.HashMap;
 
-import edu.wpi.first.wpilibj2.command.Command;
+// import edu.wpi.first.wpilibj2.command.Command;
 
-public class eventMap {
-    private HashMap<String, Command> eventMap = new HashMap<>();
-}
+// public class eventMap {
+//     private HashMap<String, Command> eventMap = new HashMap<>();
+// }

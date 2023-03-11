@@ -6,13 +6,15 @@ import edu.wpi.first.wpilibj.Timer;
 
 public class AutonIntakeCommand extends CommandBase{
     IntakeSubsystem intakeSubsystem;
+    Swerve swerve;
     Timer timer;
     double startTime = 0;
     double endTime = 0;
     boolean position = true;
     
-    public AutonIntakeCommand(IntakeSubsystem intakeSubsystem) {
+    public AutonIntakeCommand(IntakeSubsystem intakeSubsystem, Swerve swerve) {
         this.intakeSubsystem = intakeSubsystem;
+        this.swerve = swerve;
         timer = new Timer();
         addRequirements(intakeSubsystem);
     }
@@ -26,6 +28,7 @@ public class AutonIntakeCommand extends CommandBase{
     @Override
     public void execute() {
         intakeSubsystem.intakeOn(true);
+        // swerve.reverseGyro();
     }
 
     @Override

@@ -23,7 +23,6 @@ public class ElevatorCommand extends CommandBase {
     @Override
     public void initialize()   {
         elevatorSubsystem.resetEncoders();
-        //tiltSubsystem.resetEncoders();
     }
 
     @Override 
@@ -35,6 +34,10 @@ public class ElevatorCommand extends CommandBase {
         else if (controller.getXButton())    {
             elevatorSubsystem.goUp(-10022);
             tiltSubsystem.tiltDown(scoreValue);
+        }
+        else if (controller.getAButton())  {
+            elevatorSubsystem.goDown(-750);
+            tiltSubsystem.emergencyTiltUp(homeValue);
         }
         else    {
             elevatorSubsystem.goDown(-750);

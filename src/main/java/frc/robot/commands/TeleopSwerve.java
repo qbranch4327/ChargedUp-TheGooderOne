@@ -45,12 +45,21 @@ public class TeleopSwerve extends CommandBase {
             true
         );
 
-        if (controller.getRawButton(5))   {
+        if (controller.getRawButton(4)) {
+            s_Swerve.balance();
+        }
+
+        if (controller.getRawButton(8))   {
             s_Swerve.zeroGyro();
         }
 
         if (controller.getRawButton(3)) {
             s_Swerve.xStance();
         }
+
+        // if (controller.getRawButton(2)){
+        //     s_Swerve.reverseGyro();
+        // }
+
     }
 }

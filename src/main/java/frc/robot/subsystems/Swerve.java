@@ -104,16 +104,44 @@ public class Swerve extends SubsystemBase {
     //     }
     // }
 
-    public float getPitch() {
-        return gyro.getPitch();
+    // Gyro Information //
+
+    public float getRoll() {
+        return gyro.getRoll();
+    }
+
+    public void balance()   {
+        boolean start = false ;
+        boolean reverse = false;
+        if (gyro.getRoll() < -13)    {
+            slowDown(true);
+            start = true;
+        }
+        else if (gyro.getRoll() > -12 && start && !reverse)    {
+            xStance();
+            start = false;
+        }
+        if (gyro.getRoll() > 13)    {
+            slowDown(false);
+            start = true;
+            reverse = true;
+        }
+        else if (gyro.getRoll() < 12 && start && reverse){
+            xStance();
+            start = false;
+            reverse = false;
+        }
     }
 
     public void zeroGyro(){
         gyro.reset();
     }
 
+    //TODO: We don't know if this works.
+
     public void reverseGyro(){
         gyro.setAngleAdjustment(180);
+        gyro.reset();
     }
 
     public Rotation2d getYaw() {
@@ -133,15 +161,38 @@ public class Swerve extends SubsystemBase {
         mSwerveMods[3].setDesiredState(new SwerveModuleState(0.1, new Rotation2d(Math.PI * 0.75)), false);
     }
 
-    public void slowDown()  {
-        for (int i = 0; i < mSwerveMods.length; i++)    {
-            mSwerveMods[i].setDesiredState(new SwerveModuleState(0.1, new Rotation2d(0)), false);
+    public void slowDown(boolean direction)  {
+        if (direction){
+            for (int i = 0; i < mSwerveMods.length; i++)    {
+                mSwerveMods[i].setDesiredState(new SwerveModuleState(.4, new Rotation2d(0)), false);
+            }
         }
+        else {
+            for (int i = 0; i < mSwerveMods.length; i++)    {
+                mSwerveMods[i].setDesiredState(new SwerveModuleState(-.4, new Rotation2d(0)), false);
+            }
+        }  
+    }
+
+    public void drive(boolean direction)  {
+        if (direction){
+            for (int i = 0; i < mSwerveMods.length; i++)    {
+                mSwerveMods[i].setDesiredState(new SwerveModuleState(2, new Rotation2d(0)), false);
+            }
+        }
+        else {
+            for (int i = 0; i < mSwerveMods.length; i++)    {
+                mSwerveMods[i].setDesiredState(new SwerveModuleState(-2, new Rotation2d(0)), false);
+            }
+        }  
     }
 
     @Override
     public void periodic(){
         swerveOdometry.update(getYaw(), getModulePositions());  
+        SmartDashboard.putNumber("pitch", gyro.getPitch());
+        SmartDashboard.putNumber("yaw", gyro.getYaw());
+        SmartDashboard.putNumber("roll", gyro.getRoll());
 
         for(SwerveModule mod : mSwerveMods){
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Cancoder", mod.getCanCoder().getDegrees());
@@ -150,6 +201,7 @@ public class Swerve extends SubsystemBase {
             SmartDashboard.putNumber("Gyro Angle ", gyro.getYaw());    
         }
     }
+
 
     /* */
 }

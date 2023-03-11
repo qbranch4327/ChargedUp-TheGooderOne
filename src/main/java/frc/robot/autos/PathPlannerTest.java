@@ -8,7 +8,6 @@ import com.pathplanner.lib.auto.PIDConstants;
 import com.pathplanner.lib.auto.SwerveAutoBuilder;
 import com.pathplanner.lib.commands.FollowPathWithEvents;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.Subsystem;
@@ -33,7 +32,7 @@ public class PathPlannerTest {
         this.intakesub = intakesub;
         print = new print();
         vomit = new VomitCommand(intakesub, spinnerSub); 
-        intake = new AutonIntakeCommand(intakesub);
+        intake = new AutonIntakeCommand(intakesub, swerve);
         subsystems = new Subsystem[]{swerve};
         this.builder = new SwerveAutoBuilder(
             swerve::getPose, 
