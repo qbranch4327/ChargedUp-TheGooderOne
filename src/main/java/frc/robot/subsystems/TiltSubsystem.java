@@ -1,17 +1,19 @@
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TiltSubsystem extends SubsystemBase  {
     
-    PWMSparkMax tiltMotor;
+    CANSparkMax tiltMotor;
     DutyCycleEncoder tiltEncoder;
     private final double holdingV = -0.3;
     public TiltSubsystem()    {
-        tiltMotor = new PWMSparkMax(1);
+        tiltMotor = new CANSparkMax(14, MotorType.kBrushless);
         tiltEncoder = new DutyCycleEncoder(2);
     }
 
@@ -37,7 +39,7 @@ public class TiltSubsystem extends SubsystemBase  {
 
     public void tiltUp(double degrees)    {
         if (tiltEncoder.getAbsolutePosition() >= degrees + 0.01 || tiltEncoder.getAbsolutePosition() <= degrees - 0.01)   {
-            tiltMotor.set(-0.4);
+            tiltMotor.set(-0.15);
         }
         else{
             tiltMotor.stopMotor();

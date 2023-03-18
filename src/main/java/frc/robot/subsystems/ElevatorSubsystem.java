@@ -1,25 +1,26 @@
 package frc.robot.subsystems;
 
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ElevatorSubsystem extends SubsystemBase{
 
-    PWMSparkMax elevator;
+    CANSparkMax elevator;
     Encoder elevatorEncoder;
     //elevator1 is the tilt
     //elevator2 is the carriage
     public ElevatorSubsystem()  {
-        elevator = new PWMSparkMax(2);
+        elevator = new CANSparkMax(15, MotorType.kBrushless);
         elevatorEncoder = new Encoder(0, 1);
         elevator.setInverted(false);
     }
 
     public void goUp(double distance)  {
         if (elevatorEncoder.getDistance() >= distance + 200)   {
-            elevator.set(0.50);
+            elevator.set(0.30);
         }
         else if(elevatorEncoder.getDistance() <= distance - 200){
             elevator.set(-0.30);
@@ -38,7 +39,7 @@ public class ElevatorSubsystem extends SubsystemBase{
     }
 
     public void goDown(double distance)  {
-        elevator.set(-0.30);
+        elevator.set(-0.10);
         if (elevatorEncoder.getDistance() >= distance)  {
            elevator.stopMotor();
         }

@@ -47,7 +47,6 @@ public class RobotContainer {
     private static final String[] paths = {
         // "TEST",
         "Red Auton 2 MIDDLE",
-        "Blue Auton 2 MIDDLE",
         "Red Auton 1",
         "Red Auton 3"
         };

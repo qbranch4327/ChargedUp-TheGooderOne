@@ -35,15 +35,15 @@ public class IntakeCommand extends CommandBase {
         else    {
           intakeSubsystem.intakeOff();
         }
-        if (controller2.getLeftX()>.2)   {
-            spinnerSubsystem.spin(true);
-        }
-        else if (controller2.getLeftX()<-.2){
-            spinnerSubsystem.spin(false);
-        }
-        else {
-            spinnerSubsystem.stop();
-        }        
+        // if (controller2.getLeftX()>.2)   {
+        //     spinnerSubsystem.spin(true);
+        // }
+        // else if (controller2.getLeftX()<-.2){
+        //     spinnerSubsystem.spin(false);
+        // }
+        // else {
+        //     spinnerSubsystem.stop();
+        // }        
 
         if (controller2.getLeftBumper())    {
             intakeSubsystem.grab();
