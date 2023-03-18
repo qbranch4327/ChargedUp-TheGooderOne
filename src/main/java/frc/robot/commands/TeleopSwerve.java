@@ -60,10 +60,10 @@ public class TeleopSwerve extends CommandBase {
 
         // Slow down //
         if (controller.getRawAxis(2) > 0.75) {
-            speedMultiplier = 1.0;
+            speedMultiplier = 0.1;
         }
         else {
-            speedMultiplier = 0.5;
+            speedMultiplier = 1.0;
         }
 
         // if (controller.getRawButton(2)){
