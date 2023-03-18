@@ -98,12 +98,6 @@ public class Swerve extends SubsystemBase {
         return positions;
     }
 
-    // public void dock()  {
-    //     if (gyro.getPitch() > 0)    {
-
-    //     }
-    // }
-
     // Gyro Information //
 
     public float getRoll() {
@@ -155,7 +149,7 @@ public class Swerve extends SubsystemBase {
     }
 
     public void xStance()   {
-        mSwerveMods[0].setDesiredState(new SwerveModuleState(0.1,new Rotation2d(Math.PI * 0.75)), false);
+        mSwerveMods[0].setDesiredState(new SwerveModuleState(0.1, new Rotation2d(Math.PI * 0.75)), false);
         mSwerveMods[1].setDesiredState(new SwerveModuleState(0.1, new Rotation2d(Math.PI * 0.25)), false);
         mSwerveMods[2].setDesiredState(new SwerveModuleState(0.1, new Rotation2d(Math.PI * 0.25)), false);
         mSwerveMods[3].setDesiredState(new SwerveModuleState(0.1, new Rotation2d(Math.PI * 0.75)), false);
@@ -197,8 +191,7 @@ public class Swerve extends SubsystemBase {
         for(SwerveModule mod : mSwerveMods){
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Cancoder", mod.getCanCoder().getDegrees());
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Integrated", mod.getPosition().angle.getDegrees());
-            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);
-            SmartDashboard.putNumber("Gyro Angle ", gyro.getYaw());    
+            SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Velocity", mod.getState().speedMetersPerSecond);  
         }
     }
 

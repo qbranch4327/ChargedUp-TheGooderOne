@@ -18,6 +18,7 @@ public class TeleopSwerve extends CommandBase {
     private DoubleSupplier rotationSup;
     private BooleanSupplier robotCentricSup;
     private Joystick controller;
+    private double speedMultiplier;
 
     public TeleopSwerve(Swerve s_Swerve, DoubleSupplier translationSup, DoubleSupplier strafeSup, DoubleSupplier rotationSup, BooleanSupplier robotCentricSup, Joystick controller) {
         this.s_Swerve = s_Swerve;
@@ -33,13 +34,13 @@ public class TeleopSwerve extends CommandBase {
     @Override
     public void execute() {
         /* Get Values, Deadband*/
-        double translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), Constants.stickDeadband);
+        double translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), (Constants.stickDeadband));
         double strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband);
         double rotationVal = MathUtil.applyDeadband(rotationSup.getAsDouble(), Constants.stickDeadband);
 
         /* Drive */
         s_Swerve.drive(
-            new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed), 
+            new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed * speedMultiplier), 
             rotationVal * Constants.Swerve.maxAngularVelocity, 
             !robotCentricSup.getAsBoolean(), 
             true
@@ -49,12 +50,20 @@ public class TeleopSwerve extends CommandBase {
             s_Swerve.balance();
         }
 
-        if (controller.getRawButton(8))   {
+        if (controller.getRawButton(5))   {
             s_Swerve.zeroGyro();
         }
 
         if (controller.getRawButton(3)) {
             s_Swerve.xStance();
+        }
+
+        // Slow down //
+        if (controller.getRawAxis(2) > 0.75) {
+            speedMultiplier = 1.0;
+        }
+        else {
+            speedMultiplier = 0.5;
         }
 
         // if (controller.getRawButton(2)){

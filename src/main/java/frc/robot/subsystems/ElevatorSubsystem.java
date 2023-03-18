@@ -10,8 +10,8 @@ public class ElevatorSubsystem extends SubsystemBase{
 
     CANSparkMax elevator;
     Encoder elevatorEncoder;
-    //elevator1 is the tilt
-    //elevator2 is the carriage
+    private final double holdingV = 0.05;
+    
     public ElevatorSubsystem()  {
         elevator = new CANSparkMax(15, MotorType.kBrushless);
         elevatorEncoder = new Encoder(0, 1);
@@ -20,13 +20,13 @@ public class ElevatorSubsystem extends SubsystemBase{
 
     public void goUp(double distance)  {
         if (elevatorEncoder.getDistance() >= distance + 200)   {
-            elevator.set(0.30);
+            elevator.set(0.60);
         }
         else if(elevatorEncoder.getDistance() <= distance - 200){
-            elevator.set(-0.30);
+            elevator.set(-0.60);
         }
         else{
-            elevator.stopMotor();
+            elevator.set(holdingV);
         }
     }
     
@@ -39,7 +39,7 @@ public class ElevatorSubsystem extends SubsystemBase{
     }
 
     public void goDown(double distance)  {
-        elevator.set(-0.10);
+        elevator.set(-0.15);
         if (elevatorEncoder.getDistance() >= distance)  {
            elevator.stopMotor();
         }
