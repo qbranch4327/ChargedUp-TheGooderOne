@@ -42,6 +42,8 @@ public class autoBuilder {
         eventMap.put("vomitCargo", new VomitCommand(iSub, sSub));
         eventMap.put("elevatorCommand", new AutonElevatorCommand(eSub));
         eventMap.put("dock", new DockCommand(swerve));
+        eventMap.put("goOver", new GoOverCommand(swerve));
+        eventMap.put("reverseDock", new ReverseDockCommand(swerve));
 
         // Create the AutoBuilder. This only needs to be created once when robot code starts, not every time you want to create an auto command. A good place to put this is in RobotContainer along with your subsystems.
         builder = new SwerveAutoBuilder(

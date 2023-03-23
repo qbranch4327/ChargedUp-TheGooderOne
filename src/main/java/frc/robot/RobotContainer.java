@@ -46,9 +46,12 @@ public class RobotContainer {
     private final autoBuilder autoBuilder;
     private static final String[] paths = {
         // "TEST",
-        "Red Auton 2 MIDDLE",
+        "Platform Balence Middle",
         "Red Auton 1",
-        "Red Auton 3"
+        "Red Auton 3", 
+        "Blue Auton 1",
+        "Blue Auton 3",
+        "Dock Auton"
         };
 
     SendableChooser<String> qChooser = new SendableChooser<>();
