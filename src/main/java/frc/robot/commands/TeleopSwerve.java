@@ -5,7 +5,6 @@ import frc.robot.subsystems.Swerve;
 
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
-
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -33,6 +32,7 @@ public class TeleopSwerve extends CommandBase {
 
     @Override
     public void execute() {
+        
         /* Get Values, Deadband*/
         double translationVal = MathUtil.applyDeadband(translationSup.getAsDouble(), (Constants.stickDeadband));
         double strafeVal = MathUtil.applyDeadband(strafeSup.getAsDouble(), Constants.stickDeadband);
@@ -41,14 +41,14 @@ public class TeleopSwerve extends CommandBase {
         /* Drive */
         s_Swerve.drive(
             new Translation2d(translationVal, strafeVal).times(Constants.Swerve.maxSpeed * speedMultiplier), 
-            rotationVal * Constants.Swerve.maxAngularVelocity, 
+            rotationVal * (Constants.Swerve.maxAngularVelocity * speedMultiplier), 
             !robotCentricSup.getAsBoolean(), 
             true
         );
 
-        if (controller.getRawButton(4)) {
-            s_Swerve.balance();
-        }
+        // if (controller.getRawButton(4)) {
+        //     s_Swerve.balance();
+        // }
 
         if (controller.getRawButton(5))   {
             s_Swerve.zeroGyro();
@@ -60,7 +60,7 @@ public class TeleopSwerve extends CommandBase {
 
         // Slow down //
         if (controller.getRawAxis(2) > 0.75) {
-            speedMultiplier = 0.1;
+            speedMultiplier = 0.2;
         }
         else {
             speedMultiplier = 1.0;

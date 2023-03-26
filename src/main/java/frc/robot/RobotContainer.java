@@ -45,8 +45,6 @@ public class RobotContainer {
     /* Paths */
     private final autoBuilder autoBuilder;
     private static final String[] paths = {
-        // "TEST",
-        "Platform Balence Middle",
         "Red Auton 1",
         "Red Auton 3", 
         "Blue Auton 1",

@@ -27,6 +27,13 @@ public class IntakeSubsystem extends SubsystemBase {
         }
     }
 
+    
+    public void intakeSlow(boolean forward)  {
+        if (forward)    {
+            intakeMotor.set(.3);
+        }
+    }
+
     public void intakeOff() {
         intakeMotor.stopMotor();
     }

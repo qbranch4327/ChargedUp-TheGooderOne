@@ -1,4 +1,5 @@
 package frc.robot.commands;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.*;
 
@@ -7,6 +8,7 @@ public class DockCommand extends CommandBase{
     Swerve swerve;
     boolean docked = false;
     boolean start = false ;
+    double offset;
 
     public DockCommand(Swerve swerve)    {
         this.swerve = swerve;
@@ -15,6 +17,7 @@ public class DockCommand extends CommandBase{
     @Override
     public void initialize() {
         start = false;
+        offset = swerve.getPitch();
     }
 
     @Override
@@ -23,7 +26,7 @@ public class DockCommand extends CommandBase{
         if (!start){
             swerve.drive(false);
         }
-        if (swerve.getRoll() > 13)    {
+        if (swerve.getPitch() > 13 + offset)    {
             swerve.slowDown(false);
             start = true;
         }
@@ -31,8 +34,9 @@ public class DockCommand extends CommandBase{
 
     @Override
     public boolean isFinished(){
-        if (swerve.getRoll() < 12 && start)    {
+        if (swerve.getPitch() < 12 + offset && start)    {
             swerve.xStance();
+            swerve.stop();
             start = false;
             return true;
         }

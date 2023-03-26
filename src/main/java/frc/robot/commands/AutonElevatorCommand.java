@@ -28,7 +28,7 @@ public class AutonElevatorCommand extends CommandBase{
 
     @Override
     public boolean isFinished() {
-        if (elevatorSubsystem.encoderValue() < -1500)   {
+        if (elevatorSubsystem.encoderValue() < -2500)   {
             elevatorSubsystem.goDown();
             return true;
         }

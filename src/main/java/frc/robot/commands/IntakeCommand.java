@@ -30,6 +30,9 @@ public class IntakeCommand extends CommandBase {
             intakeSubsystem.intakeOn(true);
          }
         else if (controller2.getLeftY() < -.2){
+            intakeSubsystem.intakeSlow(true);
+        }
+        else if (controller2.getLeftY() > .2){
             intakeSubsystem.intakeOn(false);
         }
         else    {

@@ -5,12 +5,13 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.math.controller.PIDController;
 
 public class ElevatorSubsystem extends SubsystemBase{
 
     CANSparkMax elevator;
     Encoder elevatorEncoder;
-    private final double holdingV = 0.1;
+    private final double holdingV = 0.01;
     
     public ElevatorSubsystem()  {
         elevator = new CANSparkMax(15, MotorType.kBrushless);
@@ -19,11 +20,11 @@ public class ElevatorSubsystem extends SubsystemBase{
     }
 
     public void goUp(double distance)  {
-        if (elevatorEncoder.getDistance() >= distance + 200)   {
-            elevator.set(0.60);
+        if (elevatorEncoder.getDistance() >= distance + 400)   {
+            elevator.set(0.40);
         }
-        else if(elevatorEncoder.getDistance() <= distance - 200){
-            elevator.set(-0.60);
+        else if(elevatorEncoder.getDistance() <= distance - 400){
+            elevator.set(-0.40);
         }
         else{
             elevator.set(holdingV);
@@ -31,15 +32,15 @@ public class ElevatorSubsystem extends SubsystemBase{
     }
     
     public void goUp()  {
-        elevator.set(.5);
+        elevator.set(.3);
     }
     
     public void goDown(){
-        elevator.set(-.3);
+        elevator.set(-.13);
     }
 
     public void goDown(double distance)  {
-        elevator.set(-0.15);
+        elevator.set(-0.13);
         if (elevatorEncoder.getDistance() >= distance)  {
            elevator.stopMotor();
         }

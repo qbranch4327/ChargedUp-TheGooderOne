@@ -7,7 +7,7 @@ import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
-
+import edu.wpi.first.wpilibj.SerialPort;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -24,7 +24,8 @@ public class Swerve extends SubsystemBase {
     private AHRS gyro;
 
     public Swerve() {
-        gyro = new AHRS(I2C.Port.kOnboard);
+        // gyro = new AHRS(I2C.Port.kOnboard); // use w/ I2C
+        gyro = new AHRS(SerialPort.Port.kUSB1);
         zeroGyro();
 
         mSwerveMods = new SwerveModule[] {
@@ -104,6 +105,10 @@ public class Swerve extends SubsystemBase {
         return gyro.getRoll();
     }
 
+    public float getPitch() {
+        return gyro.getPitch();
+    }
+
     public void balance()   {
         boolean start = false ;
         boolean reverse = false;
@@ -129,14 +134,15 @@ public class Swerve extends SubsystemBase {
 
     public void zeroGyro(){
         gyro.reset();
+        gyro.resetDisplacement();
     }
 
     //TODO: We don't know if this works.
 
-    public void reverseGyro(){
-        gyro.setAngleAdjustment(180);
-        gyro.reset();
-    }
+    // public void reverseGyro(){
+    //     gyro.setAngleAdjustment(180);
+    //     gyro.reset();
+    // }
 
     public Rotation2d getYaw() {
         return (Constants.Swerve.invertGyro) ? Rotation2d.fromDegrees(360 - gyro.getYaw()) : Rotation2d.fromDegrees(gyro.getYaw());
@@ -148,6 +154,13 @@ public class Swerve extends SubsystemBase {
         }
     }
 
+    public void stop()   {
+        mSwerveMods[0].setDesiredState(new SwerveModuleState(0, new Rotation2d(Math.PI * 0.75)), false);
+        mSwerveMods[1].setDesiredState(new SwerveModuleState(0, new Rotation2d(Math.PI * 0.25)), false);
+        mSwerveMods[2].setDesiredState(new SwerveModuleState(0, new Rotation2d(Math.PI * 0.25)), false);
+        mSwerveMods[3].setDesiredState(new SwerveModuleState(0, new Rotation2d(Math.PI * 0.75)), false);
+    }
+    
     public void xStance()   {
         mSwerveMods[0].setDesiredState(new SwerveModuleState(0.1, new Rotation2d(Math.PI * 0.75)), false);
         mSwerveMods[1].setDesiredState(new SwerveModuleState(0.1, new Rotation2d(Math.PI * 0.25)), false);
@@ -171,12 +184,12 @@ public class Swerve extends SubsystemBase {
     public void drive(boolean direction)  {
         if (direction){
             for (int i = 0; i < mSwerveMods.length; i++)    {
-                mSwerveMods[i].setDesiredState(new SwerveModuleState(2, new Rotation2d(0)), false);
+                mSwerveMods[i].setDesiredState(new SwerveModuleState(2.5, new Rotation2d(0)), false);
             }
         }
         else {
             for (int i = 0; i < mSwerveMods.length; i++)    {
-                mSwerveMods[i].setDesiredState(new SwerveModuleState(-2, new Rotation2d(0)), false);
+                mSwerveMods[i].setDesiredState(new SwerveModuleState(-2.5, new Rotation2d(0)), false);
             }
         }  
     }
