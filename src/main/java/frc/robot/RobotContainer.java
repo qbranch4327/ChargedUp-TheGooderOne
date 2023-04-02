@@ -26,6 +26,7 @@ public class RobotContainer {
     private final TiltSubsystem tSub;
     private final IntakeSubsystem iSub;
     private final SpinnerSubsystem sSub;
+    private final ForkSubsystem fSub;
     //private final VisionSubsystem vision;
 
     /* Drive Controls */
@@ -40,7 +41,6 @@ public class RobotContainer {
 
     /* Subsystems */
     private final Swerve s_Swerve = new Swerve();
-    // private final PathPlannerTest pathPlannerTest;
 
     /* Paths */
     private final autoBuilder autoBuilder;
@@ -63,6 +63,7 @@ public class RobotContainer {
         this.tSub = new TiltSubsystem();
         this.iSub = new IntakeSubsystem();
         this.sSub = new SpinnerSubsystem();
+        this.fSub = new ForkSubsystem();
         //this.vision = new VisionSubsystem();
         this.autoBuilder = new autoBuilder(s_Swerve, iSub, sSub, eSub);
 
@@ -78,6 +79,7 @@ public class RobotContainer {
 
         eSub.setDefaultCommand(new ElevatorCommand(eSub, tSub, driver2));
         iSub.setDefaultCommand(new IntakeCommand(iSub, sSub, driver2, driver));
+        fSub.setDefaultCommand(new ForkCommand(fSub, driver));
 
         s_Swerve.setDefaultCommand(
             new TeleopSwerve(
