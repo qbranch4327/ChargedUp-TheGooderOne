@@ -9,7 +9,6 @@ import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.wpilibj.SerialPort;
 import com.kauailabs.navx.frc.AHRS;
-import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -24,7 +23,6 @@ public class Swerve extends SubsystemBase {
     private AHRS gyro;
 
     public Swerve() {
-        // gyro = new AHRS(I2C.Port.kOnboard); // use w/ I2C
         gyro = new AHRS(SerialPort.Port.kUSB1);
         zeroGyro();
 

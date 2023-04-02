@@ -6,28 +6,32 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.math.controller.*;
 
 public class TiltSubsystem extends SubsystemBase  {
     
-    CANSparkMax tiltMotor;
-    DutyCycleEncoder tiltEncoder;
+    private CANSparkMax tiltMotor;
+    private DutyCycleEncoder tiltEncoder;
+    private PIDController armController;
     private final double holdingV = -0.085;
 
     public TiltSubsystem()    {
         tiltMotor = new CANSparkMax(14, MotorType.kBrushless);
         tiltEncoder = new DutyCycleEncoder(2);
+        armController = new PIDController(1, 0, 1);
     }
 
-    public void tiltDown(double degrees)    {
-        if (tiltEncoder.getAbsolutePosition() >= degrees + 0.02)   {
-            tiltMotor.set(0.12);
-        }
-        else if(tiltEncoder.getAbsolutePosition() <= degrees - 0.02){
-            tiltMotor.set(0.12);
-        }
-        else{
-            tiltMotor.set(holdingV);
-        }
+    public void tiltDown(double pos)    {
+        tiltMotor.set(armController.calculate(tiltEncoder.getAbsolutePosition(), pos));
+        // if (tiltEncoder.getAbsolutePosition() >= pos + 0.02)   {
+        //     tiltMotor.set(0.12);
+        // }
+        // else if(tiltEncoder.getAbsolutePosition() <= pos - 0.02){
+        //     tiltMotor.set(0.12);
+        // }
+        // else{
+        //     tiltMotor.set(holdingV);
+        // }
     }
 
     public void tiltDown(){
@@ -38,8 +42,8 @@ public class TiltSubsystem extends SubsystemBase  {
         tiltMotor.set(.08);
     }
 
-    public void tiltUp(double degrees)    {
-        if (tiltEncoder.getAbsolutePosition() >= degrees + 0.01 || tiltEncoder.getAbsolutePosition() <= degrees - 0.01)   {
+    public void tiltUp(double pos)    {
+        if (tiltEncoder.getAbsolutePosition() >= pos + 0.01 || tiltEncoder.getAbsolutePosition() <= pos - 0.01)   {
             tiltMotor.set(-0.15);
         }
         else{
@@ -47,8 +51,8 @@ public class TiltSubsystem extends SubsystemBase  {
         }
     }
 
-    public void emergencyTiltUp(double degrees){
-        if (tiltEncoder.getAbsolutePosition() >= degrees + 0.01 || tiltEncoder.getAbsolutePosition() <= degrees - 0.01)   {
+    public void emergencyTiltUp(double pos){
+        if (tiltEncoder.getAbsolutePosition() >= pos + 0.01 || tiltEncoder.getAbsolutePosition() <= pos - 0.01)   {
             tiltMotor.set(-0.45);
         }
         else{
