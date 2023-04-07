@@ -50,10 +50,6 @@ public class TeleopSwerve extends CommandBase {
         //     s_Swerve.balance();
         // }
 
-        if (controller.getRawButton(5))   {
-            s_Swerve.zeroGyro();
-        }
-
         if (controller.getRawButton(3)) {
             s_Swerve.xStance();
         }
