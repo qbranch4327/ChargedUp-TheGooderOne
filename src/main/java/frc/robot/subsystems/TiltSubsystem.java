@@ -19,19 +19,20 @@ public class TiltSubsystem extends SubsystemBase  {
         tiltMotor = new CANSparkMax(14, MotorType.kBrushless);
         tiltEncoder = new DutyCycleEncoder(2);
         armController = new PIDController(1, 0, 1);
+        armController.setTolerance(0.02, 0.02);
     }
 
-    public void tiltDown(double pos)    {
-        tiltMotor.set(armController.calculate(tiltEncoder.getAbsolutePosition(), pos));
-        // if (tiltEncoder.getAbsolutePosition() >= pos + 0.02)   {
-        //     tiltMotor.set(0.12);
-        // }
-        // else if(tiltEncoder.getAbsolutePosition() <= pos - 0.02){
-        //     tiltMotor.set(0.12);
-        // }
-        // else{
-        //     tiltMotor.set(holdingV);
-        // }
+    public void tilt(double pos)    {
+
+        if (!(armController.atSetpoint())) {
+            tiltMotor.set(armController.calculate(tiltEncoder.getAbsolutePosition(), pos));
+            System.out.println("MOVING");
+        }
+        else {
+            tiltMotor.stopMotor();
+            System.out.println("OK");
+        }
+        
     }
 
     public void tiltDown(){

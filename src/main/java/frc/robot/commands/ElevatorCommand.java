@@ -29,11 +29,11 @@ public class ElevatorCommand extends CommandBase {
     public void execute()   {
         if (controller.getYButton())    {
             elevatorSubsystem.goUp(-13800);
-            tiltSubsystem.tiltDown(scoreValue);
+            tiltSubsystem.tilt(scoreValue);
         }
         else if (controller.getXButton())    {
             elevatorSubsystem.goUp(-9622);
-            tiltSubsystem.tiltDown(scoreValue);
+            tiltSubsystem.tilt(scoreValue);
         }
         else if (controller.getAButton())  {
             // elevatorSubsystem.goUp(-7000);
@@ -41,7 +41,7 @@ public class ElevatorCommand extends CommandBase {
         }
         else    {
             elevatorSubsystem.goDown(-750);
-            tiltSubsystem.tiltUp(homeValue);
+            tiltSubsystem.tilt(homeValue);
         }
     }
 }
