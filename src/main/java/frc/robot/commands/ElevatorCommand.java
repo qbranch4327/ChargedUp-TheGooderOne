@@ -23,25 +23,31 @@ public class ElevatorCommand extends CommandBase {
     @Override
     public void initialize()   {
         elevatorSubsystem.resetEncoders();
+        tiltSubsystem.resetPID();
     }
 
     @Override 
     public void execute()   {
         if (controller.getYButton())    {
             elevatorSubsystem.goUp(-13800);
-            tiltSubsystem.tiltDown(scoreValue);
+            tiltSubsystem.tilt(scoreValue);
+            System.out.println("HIGH");
+
         }
         else if (controller.getXButton())    {
             elevatorSubsystem.goUp(-9622);
-            tiltSubsystem.tiltDown(scoreValue);
+            tiltSubsystem.tilt(scoreValue);
+            System.out.println("MID");
+
         }
-        else if (controller.getAButton())  {
-            // elevatorSubsystem.goUp(-7000);
-            // tiltSubsystem.tiltDown(scoreValue);
-        }
+        // else if (controller.getAButton())  {
+        //     // elevatorSubsystem.goUp(-7000);
+        //     // tiltSubsystem.tiltDown(scoreValue);
+        // }
         else    {
             elevatorSubsystem.goDown(-150);
-            tiltSubsystem.tiltUp(homeValue);
+            tiltSubsystem.tilt(homeValue);
+            System.out.println("HOME");
         }
     }
 }
