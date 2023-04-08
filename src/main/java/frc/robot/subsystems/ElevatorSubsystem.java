@@ -11,7 +11,7 @@ public class ElevatorSubsystem extends SubsystemBase{
 
     CANSparkMax elevator;
     Encoder elevatorEncoder;
-    private final double holdingV = 0.01;
+    private final double holdingV = 0.05;
     
     public ElevatorSubsystem()  {
         elevator = new CANSparkMax(15, MotorType.kBrushless);

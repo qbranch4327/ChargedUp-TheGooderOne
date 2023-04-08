@@ -11,7 +11,7 @@ public class TiltSubsystem extends SubsystemBase  {
     
     CANSparkMax tiltMotor;
     DutyCycleEncoder tiltEncoder;
-    private final double holdingV = -0.085;
+    private final double holdingPwr = -0.085;
 
     public TiltSubsystem()    {
         tiltMotor = new CANSparkMax(14, MotorType.kBrushless);
@@ -26,7 +26,7 @@ public class TiltSubsystem extends SubsystemBase  {
             tiltMotor.set(-0.12);
         }
         else{
-            tiltMotor.set(holdingV);
+            tiltMotor.set(holdingPwr);
         }
     }
 
