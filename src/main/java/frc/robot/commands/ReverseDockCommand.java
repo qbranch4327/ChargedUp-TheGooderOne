@@ -1,6 +1,7 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.*;
+import com.ctre.phoenix.sensors.WPI_Pigeon2;
 
 public class ReverseDockCommand extends CommandBase{
     

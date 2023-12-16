@@ -10,7 +10,9 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.wpilibj.SerialPort;
 
 import com.ctre.phoenix.*;
+import com.ctre.phoenix.sensors.BasePigeon;
 import com.ctre.phoenix.sensors.Pigeon2;
+import com.ctre.phoenix.sensors.WPI_Pigeon2;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -25,12 +27,12 @@ public class Swerve extends SubsystemBase {
     public SwerveDriveOdometry swerveOdometry;
     public SwerveModule[] mSwerveMods;
     // private AHRS gyro; 
-    private Pigeon2 gyro; 
+    private WPI_Pigeon2 gyro; 
 
     public Swerve() {
         // gyro = new AHRS(I2C.Port.kOnboard); // use w/ I2C
         // gyro = new AHRS(SerialPort.Port.kUSB1);
-        gyro = new Pigeon2(0);
+        gyro = new WPI_Pigeon2(0);
         zeroGyro();
 
         mSwerveMods = new SwerveModule[] {
@@ -106,13 +108,13 @@ public class Swerve extends SubsystemBase {
 
     // Gyro Information //
 
-    // public float getRoll() {
-    //     return gyro.getRoll();
-    // }
+     public float getRoll() {
+         return (float) gyro.getRoll();
+     }
 
-    // public float getPitch() {
-    //     return gyro.getPitch();
-    // }
+     public float getPitch() {
+         return (float) gyro.getPitch();
+     }
 
     // public void balance()   {
     //     boolean start = false ;
