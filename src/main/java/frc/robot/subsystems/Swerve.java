@@ -8,6 +8,9 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.wpilibj.SerialPort;
+
+import com.ctre.phoenix.*;
+import com.ctre.phoenix.sensors.Pigeon2;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -21,11 +24,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Swerve extends SubsystemBase {
     public SwerveDriveOdometry swerveOdometry;
     public SwerveModule[] mSwerveMods;
-    private AHRS gyro;
+    // private AHRS gyro; 
+    private Pigeon2 gyro; 
 
     public Swerve() {
         // gyro = new AHRS(I2C.Port.kOnboard); // use w/ I2C
-        gyro = new AHRS(SerialPort.Port.kUSB1);
+        // gyro = new AHRS(SerialPort.Port.kUSB1);
+        gyro = new Pigeon2(0);
         zeroGyro();
 
         mSwerveMods = new SwerveModule[] {
@@ -101,40 +106,39 @@ public class Swerve extends SubsystemBase {
 
     // Gyro Information //
 
-    public float getRoll() {
-        return gyro.getRoll();
-    }
+    // public float getRoll() {
+    //     return gyro.getRoll();
+    // }
 
-    public float getPitch() {
-        return gyro.getPitch();
-    }
+    // public float getPitch() {
+    //     return gyro.getPitch();
+    // }
 
-    public void balance()   {
-        boolean start = false ;
-        boolean reverse = false;
-        if (gyro.getRoll() < -13)    {
-            slowDown(true);
-            start = true;
-        }
-        else if (gyro.getRoll() > -12 && start && !reverse)    {
-            xStance();
-            start = false;
-        }
-        if (gyro.getRoll() > 13)    {
-            slowDown(false);
-            start = true;
-            reverse = true;
-        }
-        else if (gyro.getRoll() < 12 && start && reverse){
-            xStance();
-            start = false;
-            reverse = false;
-        }
-    }
+    // public void balance()   {
+    //     boolean start = false ;
+    //     boolean reverse = false;
+    //     if (gyro.getRoll() < -13)    {
+    //         slowDown(true);
+    //         start = true;
+    //     }
+    //     else if (gyro.getRoll() > -12 && start && !reverse)    {
+    //         xStance();
+    //         start = false;
+    //     }
+    //     if (gyro.getRoll() > 13)    {
+    //         slowDown(false);
+    //         start = true;
+    //         reverse = true;
+    //     }
+    //     else if (gyro.getRoll() < 12 && start && reverse){
+    //         xStance();
+    //         start = false;
+    //         reverse = false;
+    //     }
+    // }
 
     public void zeroGyro(){
         gyro.reset();
-        gyro.resetDisplacement();
     }
 
     //TODO: We don't know if this works.
@@ -145,8 +149,10 @@ public class Swerve extends SubsystemBase {
     // }
 
     public Rotation2d getYaw() {
-        return (Constants.Swerve.invertGyro) ? Rotation2d.fromDegrees(360 - gyro.getYaw()) : Rotation2d.fromDegrees(gyro.getYaw());
+        // return (Constants.Swerve.invertGyro) ? Rotation2d.fromDegrees(360 - gyro.getYaw()) : Rotation2d.fromDegrees(gyro.getYaw());
+        return gyro.getRotation2d();
     }
+
 
     public void resetModulesToAbsolute(){
         for(SwerveModule mod : mSwerveMods){
@@ -197,9 +203,9 @@ public class Swerve extends SubsystemBase {
     @Override
     public void periodic(){
         swerveOdometry.update(getYaw(), getModulePositions());  
-        SmartDashboard.putNumber("pitch", gyro.getPitch());
-        SmartDashboard.putNumber("yaw", gyro.getYaw());
-        SmartDashboard.putNumber("roll", gyro.getRoll());
+        // SmartDashboard.putNumber("pitch", gyro.getPitch());
+        // SmartDashboard.putNumber("yaw", gyro.getYaw());
+        // SmartDashboard.putNumber("roll", gyro.getRoll());
 
         for(SwerveModule mod : mSwerveMods){
             SmartDashboard.putNumber("Mod " + mod.moduleNumber + " Cancoder", mod.getCanCoder().getDegrees());
