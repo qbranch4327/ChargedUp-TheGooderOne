@@ -29,9 +29,11 @@ public class RobotContainer {
     // private final BuddyBarSubsystem bSub;
 
     /* Drive Controls */
-    private final int translationAxis = XboxController.Axis.kLeftY.value;
-    private final int strafeAxis = XboxController.Axis.kLeftX.value;
-    private final int rotationAxis = XboxController.Axis.kRightX.value;
+    // Using InterLinkDX controller - the axes are not the same values as on an XBox so there is some translation
+    // e.g. Strafe (left/right) is the right stick X and that is axis 3. XBox axis 3 is Right Trigger.
+    private final int translationAxis = XboxController.Axis.kRightX.value;
+    private final int strafeAxis = XboxController.Axis.kRightTrigger.value;
+    private final int rotationAxis = XboxController.Axis.kLeftX.value;
     Command vCommand;
 
     /* Driver Buttons */
@@ -48,7 +50,8 @@ public class RobotContainer {
         "Red Auton 3", 
         "Blue Auton 1",
         "Blue Auton 3",
-        "Dock Auton"
+        "Dock Auton",
+        "Test Path"
         };
 
     SendableChooser<String> qChooser = new SendableChooser<>();
@@ -83,7 +86,7 @@ public class RobotContainer {
         s_Swerve.setDefaultCommand(
             new TeleopSwerve(
                 s_Swerve, 
-                () -> -driver.getRawAxis(translationAxis), 
+                () -> driver.getRawAxis(translationAxis), 
                 () -> -driver.getRawAxis(strafeAxis), 
                 () -> -driver.getRawAxis(rotationAxis), 
                 () -> robotCentric.getAsBoolean(),
